@@ -1,0 +1,40 @@
+.urgent-reading{
+  --background: #EA4735;
+  .status-reading{
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+  }
+}
+
+.important-reading{
+  --background: #C4C4C4;
+  .status-reading{
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+  }
+}
+
+.not-priority{
+  --background: #F5F5F5;
+  .status-reading{
+    font-weight: bold;
+    font-size: 13px;
+  }
+}
+
+.card-grid{
+  padding: 12px 0px !important;
+  .card-reading{
+    background-color: white;
+    width: 100%;
+    .card-reading-grid{
+      font-size: 13px;
+      padding: 15px;
+      .reading-name{
+        font-weight: bold;
+      }
+    }
+  }
+}

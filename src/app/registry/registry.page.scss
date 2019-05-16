@@ -1,0 +1,52 @@
+ion-content{
+    --ion-background-color: var(--ion-color-primary);
+    --color: white;
+    --padding-top: 40px;
+    --padding-start: 40px;
+    --padding-end: 40px;
+    --padding-bottom: 20px;
+}
+
+ion-item{
+    --color:#fff;
+}
+
+.registry-form{
+    margin-top: 50px;
+}
+
+.inputs-login{
+    ion-item{
+        font-size: 0.9rem;
+        height: 35px !important;
+        --min-height: 35px !important;
+    }
+}
+
+.align-right{
+    text-align: right !important;
+}
+
+.app-name{
+    font-size: 2rem;
+    font-family: 'modelica';
+}
+
+.app-moto{
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 30px;
+}
+
+.ahead{
+    text-align: center;
+}
+
+.footer{
+    text-align: center;
+    .login{
+        font-weight: bold;
+        margin-left: 5px;
+    }
+}
+

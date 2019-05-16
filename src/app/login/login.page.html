@@ -1,0 +1,71 @@
+<ion-content>
+
+  <ion-grid class="main-grid">
+    <!-- Nombre de la aplicación-->
+    <ion-row class="app-name">
+      <ion-col>
+        <ion-text color="primary">
+          <span>Playtura</span>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+    <!-- Lema -->
+    <ion-row class="app-moto">
+      <ion-col>
+        <ion-text>
+          <span>Una nueva</span><br>
+          <span>manera de leer</span>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+    <!-- Mensaje descripción-->
+    <ion-row class="description">
+      <ion-col>
+        <ion-text color="dark">
+          <span>Accede a tus lecturas de la universidad, acumula puntos y hazte el mejor.</span>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+    <div [formGroup]="loginForm" class="login-form">
+      <!-- Formulario -->
+      <ion-row class="inputs-login">
+        <ion-col>
+          <ion-item>
+            <ion-label position="fixed">Email</ion-label>
+            <ion-input formControlName="email" type="email" inputmode="email"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="fixed">Contraseña</ion-label>
+            <ion-input formControlName="password" type="password"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <!-- Olvidé la contraseña -->
+      <ion-row justify-content-end class="forgot">
+        <ion-col>
+          <ion-text>
+            <span>Olvidé mi contraseña</span>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <!-- Empezar-->
+      <ion-row align-items-center class="ahead">
+        <ion-col>
+          <ion-button size="default" color="secondary" (click)="ahead()" [disabled]="!loginForm.valid">Empezar</ion-button>
+        </ion-col>
+      </ion-row>
+    </div>
+    <!-- Registrarse -->
+    <ion-row class="footer">
+      <ion-col>
+        <ion-text>
+          <span>¿Aún no tienes cuenta?</span>
+          <ion-text color="tertiary" (click)="registry()" class="registry">
+            <span>Registrate</span>
+          </ion-text>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

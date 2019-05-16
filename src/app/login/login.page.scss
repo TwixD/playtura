@@ -1,0 +1,33 @@
+ion-content{
+    --padding-top: 40px;
+    --padding-start: 40px;
+    --padding-end: 40px;
+    --padding-bottom: 20px;
+}
+
+.login-form{
+    margin-top: 40px;
+}
+
+.app-name{
+    font-size: 2rem;
+    font-family: 'modelica';
+}
+
+.app-moto{
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 30px;
+}
+
+.ahead{
+    text-align: center;
+}
+
+.footer{
+    text-align: center;
+    .registry{
+        font-weight: bold;
+        margin-left: 5px;
+    }
+}

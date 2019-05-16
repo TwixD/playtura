@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="close()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="modal-title">
+      {{ reading.name }}
+      <p class="subtitle">{{ reading.course }}</p>
+    </ion-title>
+    <ion-buttons slot="primary">
+      <ion-button color="dark">
+        <ion-icon slot="icon-only" name="filing"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div>
+    <pdf-viewer [src]="reading.pdf" [render-text]="true" [show-all]="false" [fit-to-page]="true" [original-size]="false"
+      (after-load-complete)="afterLoadComplete($event)" [page]="page" style="display: block;">
+    </pdf-viewer>
+  </div>
+
+  <!-- next -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="page!==totalPages">
+    <ion-fab-button size="small" color="light" (click)="nextPage()">
+      <ion-icon name="arrow-dropright"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <!-- back -->
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed" *ngIf="page!==1">
+    <ion-fab-button size="small" color="light" (click)="previousPage()">
+      <ion-icon name="arrow-dropleft"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

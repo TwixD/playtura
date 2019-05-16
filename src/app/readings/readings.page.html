@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-searchbar></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list lines="none">
+    <ion-item *ngFor="let reading of readings | async" [class.urgent-reading]="readingStatus(reading) == 'Urgente'"
+      [class.important-reading]="readingStatus(reading) == 'Importante'" [class.not-priority]="readingStatus(reading) == 'No prioritaria'">
+      <ion-grid class="card-grid">
+        <ion-row>
+          <ion-col class="status-reading">
+            {{ readingStatus(reading) }}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div class="card-reading" (click)="openPDF(reading)">
+              <ion-grid class="card-reading-grid">
+                <ion-row class="reading-name">
+                  {{ reading.name }}
+                </ion-row>
+                <ion-row class="reading-course">
+                  {{ reading.course }}
+                </ion-row>
+                <ion-row class="reading-reading-status">
+                  {{ getReadingStatusPage(reading) }}
+                </ion-row>
+              </ion-grid>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+</ion-content>

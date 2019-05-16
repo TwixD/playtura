@@ -1,0 +1,12 @@
+<div class="custom-error" *ngIf="showError(fieldName,'required')">
+  {{ fieldLabel }} es <strong>requerido</strong>
+</div>
+<div class="custom-error" *ngIf="showError(fieldName,'email')">
+  {{ fieldLabel }} no es un <strong>correo</strong> válido
+</div>
+<div class="custom-error" *ngIf="showError(fieldName,'minlength')">
+  {{ fieldLabel }} debe contener <strong>8</strong> caracteres o más
+</div>
+<div class="custom-error" *ngIf="showError(fieldName,'maxlength')">
+  {{ fieldLabel }} debe contener menos de <strong>16</strong> caracteres
+</div>
