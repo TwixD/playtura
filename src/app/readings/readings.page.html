@@ -1,11 +1,11 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-searchbar></ion-searchbar>
+  <ion-toolbar class="toolbar">
+    <ion-searchbar placeholder="Buscar" style="padding: 12px;" [(ngModel)]="searchKey" (ionChange)="searchKeyChange($event)"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list lines="none">
+<ion-content class="content">
+  <ion-list lines="none" style="padding: 0px;">
     <ion-item *ngFor="let reading of readings | async" [class.urgent-reading]="readingStatus(reading) == 'Urgente'"
       [class.important-reading]="readingStatus(reading) == 'Importante'" [class.not-priority]="readingStatus(reading) == 'No prioritaria'">
       <ion-grid class="card-grid">
@@ -24,8 +24,20 @@
                 <ion-row class="reading-course">
                   {{ reading.course }}
                 </ion-row>
-                <ion-row class="reading-reading-status">
-                  {{ getReadingStatusPage(reading) }}
+                <ion-row class="reading-status">
+                  <ion-col class="reading-status-text">
+                    {{ getReadingStatusPage(reading) }}
+                  </ion-col>
+                  <ion-col class="reading-is-locked ion-text-right" *ngIf="readingStatus(reading) == 'No prioritaria'">
+                    <ion-icon name="lock" class="reading-padlock"></ion-icon>
+                  </ion-col>
+                </ion-row>
+                <ion-row class="reading-points" [class.urgent-reading-points]="readingStatus(reading) == 'Urgente'"
+                  [class.rmmargin]="readingStatus(reading) == 'No prioritaria'">
+                  <span>{{ timeTo(reading) }} &#183; {{ reading.points }}pts</span>
+                </ion-row>
+                <ion-row class="reading-progress">
+                  <ion-progress-bar [value]="getReadingProgress(reading)" [class.urgent-reading-progress]="readingStatus(reading) == 'Urgente'"></ion-progress-bar>
                 </ion-row>
               </ion-grid>
             </div>

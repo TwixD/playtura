@@ -1,9 +1,10 @@
 import * as _ from 'lodash';
+import * as moment from "moment";
 import { Component } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Readings } from '../models/readings';
 import { ReadingStatus } from '../models/reading-status';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { ModalController } from '@ionic/angular';
 import { PdfViewerModal } from '../pdf-viewer/pdf-viewer.modal';
 import { map } from 'rxjs/operators';
@@ -18,6 +19,8 @@ export class ReadingsPage {
 
   ReadingStatusCollection: AngularFirestoreCollection<ReadingStatus>;
   readingsCollectionRef: AngularFirestoreCollection;
+  searchKey: string = '';
+  searchKeySubject$ = new Subject<string>();
   readings: Observable<any[]>;
   statusByReading: Object = {};
   status: Array<Object> = [
@@ -27,14 +30,22 @@ export class ReadingsPage {
     },
     {
       label: 'Urgente',
-      days: 4
+      days: 2
     },
   ];
 
   constructor(private db: AngularFirestore,
     private modalController: ModalController,
     private authenticateService: AuthenticateService) {
-    this.readingsCollectionRef = db.collection<Readings>('readings', (ref) => ref.orderBy('dateDelivery'));
+    moment.locale('es');
+    this.readingsCollectionRef = db.collection<Readings>('readings', (ref) => {
+      let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
+      if (this.searchKey) {
+        query = query.where('name', '==', this.searchKey);
+      }
+      query = query.orderBy('dateDelivery');
+      return query;
+    });
     this.readings = this.readingsCollectionRef.snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Readings;
@@ -46,11 +57,13 @@ export class ReadingsPage {
   }
 
   async openPDF(reading: Object) {
-    const modal = await this.modalController.create({
-      component: PdfViewerModal,
-      componentProps: { reading }
-    });
-    return await modal.present();
+    if (this.readingStatus(reading) !== 'No prioritaria') {
+      const modal = await this.modalController.create({
+        component: PdfViewerModal,
+        componentProps: { reading }
+      });
+      return await modal.present();
+    }
   }
 
   readingStatus(reading: Object): string {
@@ -93,9 +106,26 @@ export class ReadingsPage {
     let status: string = 'Sin comenzar';
     if (_.has(this.statusByReading, reading['id']) ?
       (_.isObject(this.statusByReading[reading['id']]) ? true : false) : false) {
-      status = `Página ${this.statusByReading[reading['id']]['page']} de ${this.statusByReading[reading['id']]['totalPages']}`;
+      status = `Página ${this.statusByReading[reading['id']]['page']} - ${this.statusByReading[reading['id']]['totalPages']}`;
     }
     return status;
+  }
+
+  getReadingProgress(reading: Readings): number {
+    let porc = 0;
+    if (_.has(this.statusByReading, reading['id']) ? (_.isObject(this.statusByReading[reading['id']]) ? true : false) : false) {
+      let status: Object = this.statusByReading[reading['id']];
+      porc = _.isNumber(status['percentage']) && _.isFinite(status['percentage']) ?
+        (status['percentage'] > 0 ? (status['percentage'] / 100) : 0) : 0;
+    }
+    return porc;
+  }
+
+  timeTo(reading: Readings): string {
+    return moment(new Date(reading['dateDelivery']['seconds'] * 1000)).fromNow();
+  }
+
+  searchKeyChange(event: any) {
   }
 
 }
