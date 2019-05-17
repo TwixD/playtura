@@ -1,1 +1,68 @@
+.user-info-grid{
+    .avatar-col{
+        width: 50px !important;
+        max-width: 75px !important;
+        min-width: 75px !important;
+    }
+    .university-row{
+        color: #1373DB;
+        font-weight: bold;
+        font-size: 13px;
+    }
+    .name-row{
+        font-weight: bold;
+        font-size: 17px;
+        color: #424244;
+    }
+    .counter-row{
+        color: #424244;
+        font-size: 12px;
+    }
+}
 
+.main-segment{
+    ion-segment-button{
+        font-size: 9px !important;
+        --margin-top: 10px;
+        --padding-bottom: 0px;
+        ion-icon{
+            font-size: 13px !important;
+        }
+        ion-label{
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+    }
+}
+
+.statistics-seg1-grid{
+    margin-top: 15px;
+    padding: 10px;
+    padding-bottom: 25px;
+    border-bottom: solid 0.1px #C4C4C4;
+    .stats-header-row{
+        font-weight: bold;
+        font-size: 13px;
+        ion-col{
+            padding-bottom: 0px !important;
+        }
+    }
+    .stats-value-row{
+        font-weight: bold;
+        font-size: 25px;
+        color: #097CF8;
+        ion-col{
+            padding-top: 0px !important;
+        }
+    }
+    .stats-progress{
+        margin-top: 8px;
+        .level{
+            width: 65px !important;
+            max-width: 65px !important;
+            min-width: 65px !important;
+            color: #CED6FC;
+            font-size: 11px;
+        }
+    }
+}

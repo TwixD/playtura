@@ -1,9 +1,73 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Tab Three
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content padding="20px">
 
-<ion-content></ion-content>
+  <ion-grid class="user-info-grid">
+    <ion-row class="ion-align-items-center">
+      <ion-col class="avatar-col">
+        <ion-avatar>
+          <img src="assets/img/avatar.png">
+        </ion-avatar>
+      </ion-col>
+      <ion-col>
+        <ion-row class="university-row">
+          {{ getUniversity() | uppercase }}
+        </ion-row>
+        <ion-row class="name-row">
+          {{ ( user?.name || 'Nombre' ) | uppercase }}
+        </ion-row>
+        <ion-row class="counter-row">
+          <span style="margin-right:12px;"><strong>0</strong> apuntes</span>
+          <span><strong>0</strong> comentarios</span>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-segment (ionChange)="segmentChanged($event)" class="main-segment">
+    <ion-segment-button checked layout="icon-start" value="statistics">
+      <ion-icon name="stats"></ion-icon>
+      <ion-label>Estadísticas</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="notes">
+      <ion-label>Apuntes</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="skills">
+      <ion-label>Habilidades</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div [ngSwitch]="segmentSelected">
+    <div *ngSwitchCase="'statistics'">
+      <ion-grid class="statistics-seg1-grid">
+        <ion-row class="stats-header-row">
+          <ion-col>
+            <span>Páginas leídas</span>
+          </ion-col>
+          <ion-col>
+            <span>Puntos</span>
+          </ion-col>
+        </ion-row>
+        <ion-row class="stats-value-row">
+          <ion-col>
+            <span>4/20pág</span>
+          </ion-col>
+          <ion-col>
+            <span>50pts</span>
+          </ion-col>
+        </ion-row>
+        <ion-row class="stats-progress ion-align-items-center">
+          <ion-col class="ion-align-items-center">
+            <ion-progress-bar value="0.5" style="height: 8px;"></ion-progress-bar>
+          </ion-col>
+          <ion-col class="level">
+            <span>{{ 'Nivel 1' | uppercase }}</span>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div *ngSwitchCase="'notes'">
+    </div>
+    <div *ngSwitchCase="'skills'">
+    </div>
+  </div>
+
+</ion-content>

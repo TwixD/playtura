@@ -4,6 +4,7 @@ import { NavController, LoadingController, ToastController } from '@ionic/angula
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AuthenticateService } from '../services/authenticate.service';
 import { User } from '../models/user';
+import { universidades } from '../options/options';
 
 @Component({
   selector: 'app-registry',
@@ -13,21 +14,7 @@ import { User } from '../models/user';
 export class RegistryPage implements OnInit {
 
   registryForm: FormGroup;
-  universidades: Object = {
-    pontificia_universidad_javeriana: 'javeriana',
-    universidad_del_valle: 'universidad del valle',
-    universidad_san_buenaventura: 'san buenaventura',
-    universidad_icesi: 'icesi',
-    universidad_santiago_de_cali: 'santiago de cali',
-    universidad_autónoma_de_occidente: 'autónoma de occidente',
-    universidad_cooperativa_de_colombia: 'cooperativa de colombia',
-    fundacion_universitaria_san_martin: 'san martín',
-    universidad_libre: 'libre',
-    uniciencia: 'uniciencia',
-    universidad_antonio_narino: 'antonio nariño',
-    unicatolica: 'unicatolica'
-  };
-
+  universidades: Object = universidades;
   constructor(private nav: NavController,
     private authenticateService: AuthenticateService,
     private formBuilder: FormBuilder,
