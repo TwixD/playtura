@@ -22,7 +22,7 @@
     <ion-row class="description">
       <ion-col>
         <ion-text color="dark">
-          <span>Accede a tus lecturas de la universidad, acumula puntos y hazte el mejor.</span>
+          <span>Accede a tus lecturas, acumula puntos y hazte el mejor.</span>
         </ion-text>
       </ion-col>
     </ion-row>
@@ -31,11 +31,11 @@
       <ion-row class="inputs-login">
         <ion-col>
           <ion-item>
-            <ion-label position="fixed">Email</ion-label>
+            <ion-label class="gris" position="floating">Email</ion-label>
             <ion-input formControlName="email" type="email" inputmode="email"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label position="fixed">Contraseña</ion-label>
+            <ion-label class="gris" position="floating">Contraseña</ion-label>
             <ion-input formControlName="password" type="password"></ion-input>
           </ion-item>
         </ion-col>
@@ -43,7 +43,7 @@
       <!-- Olvidé la contraseña -->
       <ion-row justify-content-end class="forgot">
         <ion-col>
-          <ion-text>
+          <ion-text class="ion-text-end">
             <span>Olvidé mi contraseña</span>
           </ion-text>
         </ion-col>
@@ -51,7 +51,7 @@
       <!-- Empezar-->
       <ion-row align-items-center class="ahead">
         <ion-col>
-          <ion-button size="default" color="secondary" (click)="ahead()" [disabled]="!loginForm.valid">Empezar</ion-button>
+          <ion-button class="empezar" size="default" color="secondary" (click)="ahead()" [disabled]="!loginForm.valid">Empezar</ion-button>
         </ion-col>
       </ion-row>
     </div>
