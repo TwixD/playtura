@@ -6,9 +6,10 @@ import { Readings } from '../models/readings';
 import { ReadingStatus } from '../models/reading-status';
 import { Observable, Subject } from 'rxjs';
 import { ModalController } from '@ionic/angular';
-import { PdfViewerModal } from '../pdf-viewer/pdf-viewer.modal';
 import { map } from 'rxjs/operators';
 import { AuthenticateService } from '../services/authenticate.service';
+import { PdfViewerModal } from '../pdf-viewer-modal/pdf-viewer.modal';
+import { CustomAlertModal } from '../custom-alert-modal/custom-alert-modal';
 
 @Component({
   selector: 'app-readings',
@@ -26,7 +27,7 @@ export class ReadingsPage {
   status: Array<Object> = [
     {
       label: 'Importante',
-      days: 10
+      days: 8
     },
     {
       label: 'Urgente',
@@ -61,6 +62,13 @@ export class ReadingsPage {
       const modal = await this.modalController.create({
         component: PdfViewerModal,
         componentProps: { reading }
+      });
+      return await modal.present();
+    } else {
+      const modal = await this.modalController.create({
+        component: CustomAlertModal,
+        componentProps: { reading },
+        cssClass: 'my-custom-modal-css'
       });
       return await modal.present();
     }
@@ -109,6 +117,11 @@ export class ReadingsPage {
       status = `Página ${this.statusByReading[reading['id']]['page']} - ${this.statusByReading[reading['id']]['totalPages']}`;
     }
     return status;
+  }
+
+  getReadingStatusPoints(reading: Readings): number {
+    return _.has(this.statusByReading, reading['id']) ?
+      (_.isObject(this.statusByReading[reading['id']]) ? this.statusByReading[reading['id']]['pointsEarned'] : 0) : 0
   }
 
   getReadingProgress(reading: Readings): number {

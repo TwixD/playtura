@@ -34,7 +34,7 @@
                 </ion-row>
                 <ion-row class="reading-points" [class.urgent-reading-points]="readingStatus(reading) == 'Urgente'"
                   [class.rmmargin]="readingStatus(reading) == 'No prioritaria'">
-                  <span>{{ timeTo(reading) }} &#183; {{ reading.points }}pts</span>
+                  <span>{{ timeTo(reading) }} &#183; {{ getReadingStatusPoints(reading) }}pts</span>
                 </ion-row>
                 <ion-row class="reading-progress">
                   <ion-progress-bar [value]="getReadingProgress(reading)" [class.urgent-reading-progress]="readingStatus(reading) == 'Urgente'"></ion-progress-bar>

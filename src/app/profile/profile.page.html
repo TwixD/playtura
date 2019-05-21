@@ -37,32 +37,89 @@
 
   <div [ngSwitch]="segmentSelected">
     <div *ngSwitchCase="'statistics'">
-      <ion-grid class="statistics-seg1-grid">
-        <ion-row class="stats-header-row">
-          <ion-col>
-            <span>Páginas leídas</span>
-          </ion-col>
-          <ion-col>
-            <span>Puntos</span>
-          </ion-col>
-        </ion-row>
-        <ion-row class="stats-value-row">
-          <ion-col>
-            <span>4/20pág</span>
-          </ion-col>
-          <ion-col>
-            <span>50pts</span>
-          </ion-col>
-        </ion-row>
-        <ion-row class="stats-progress ion-align-items-center">
-          <ion-col class="ion-align-items-center">
-            <ion-progress-bar value="0.5" style="height: 8px;"></ion-progress-bar>
-          </ion-col>
-          <ion-col class="level">
-            <span>{{ 'Nivel 1' | uppercase }}</span>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+      <ion-slides pager="false" [options]="slideOpts" (ionSlideWillChange)="willChangeSlide($event)" #theSlider>
+        <ion-slide *ngFor="let reading of readingsArray">
+          <ion-grid>
+            <!-- PAGER -->
+            <ion-row>
+              <ion-grid class="statistics-pager-grid">
+                <ion-row>
+                  <ion-col class="ion-text-end ion-align-self-center" (click)="back()">
+                    <ion-icon name="arrow-dropleft"></ion-icon>
+                  </ion-col>
+                  <ion-col class="ion-text-center" size="6">
+                    <ion-row>
+                      <ion-col class="stats-course">
+                        {{ reading.course }}
+                      </ion-col>
+                    </ion-row>
+                    <ion-row>
+                      <ion-col class="stats-reading-name">
+                        {{ reading.name }}
+                      </ion-col>
+                    </ion-row>
+                  </ion-col>
+                  <ion-col class="ion-text-start ion-align-self-center" (click)="next()">
+                    <ion-icon name="arrow-dropright"></ion-icon>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-row>
+            <!-- SEGMENTO 1 -->
+            <ion-row class="statistics-seg1-grid">
+              <ion-grid>
+                <ion-row class="stats-header-row">
+                  <ion-col>
+                    <span>Páginas leídas</span>
+                  </ion-col>
+                  <ion-col>
+                    <span>Puntos</span>
+                  </ion-col>
+                </ion-row>
+                <ion-row class="stats-value-row">
+                  <ion-col>
+                    <span>{{ getStatusPages() }}</span>
+                  </ion-col>
+                  <ion-col>
+                    <span>{{ getStatusPoints() }}pts</span>
+                  </ion-col>
+                </ion-row>
+                <ion-row class="stats-progress ion-align-items-center">
+                  <ion-col class="ion-align-items-center">
+                    <ion-progress-bar [value]="readingLevelProgress" style="height: 8px;"></ion-progress-bar>
+                  </ion-col>
+                  <ion-col class="level">
+                    <span>{{ 'NIVEL ' + ( readingLevel + 1 ) }}</span>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <span class="stats-points">
+                    {{ getStatusPoints() }}/{{ levels[readingLevel] }}PUNTOS
+                  </span>
+                </ion-row>
+              </ion-grid>
+            </ion-row>
+            <!-- CHARTS -->
+            <ion-row class="stats-charts">
+              <ion-grid>
+                <ion-row class="charts-title">
+                  Reporte semanal
+                </ion-row>
+                <ion-row class="charts-subtitle">
+                  Páginas leídas
+                </ion-row>
+                <ion-row class="charts-read-pages">
+                  <div style="display: block">
+                    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+                      [legend]="barChartLegend" [chartType]="barChartType">
+                    </canvas>
+                  </div>
+                </ion-row>
+              </ion-grid>
+            </ion-row>
+          </ion-grid>
+        </ion-slide>
+      </ion-slides>
     </div>
     <div *ngSwitchCase="'notes'">
     </div>

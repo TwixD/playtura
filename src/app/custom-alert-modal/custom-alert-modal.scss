@@ -1,0 +1,18 @@
+.modal-content{
+    width: 100%;
+    height: 100%;
+    padding: 30px;
+    .title{
+        color: #FFCB32;
+        font-weight: bold;
+        font-size: 16px;
+    }
+    .modal-img{
+        padding: 20px;
+        max-width: 150px;
+        max-height: 150px;
+    }
+    .modal-desc{
+        color: #31373D;
+    }
+}

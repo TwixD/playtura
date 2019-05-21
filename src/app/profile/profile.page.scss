@@ -36,9 +36,7 @@
 }
 
 .statistics-seg1-grid{
-    margin-top: 15px;
-    padding: 10px;
-    padding-bottom: 25px;
+    padding: 0px 10px 20px 10px;
     border-bottom: solid 0.1px #C4C4C4;
     .stats-header-row{
         font-weight: bold;
@@ -64,5 +62,41 @@
             color: #CED6FC;
             font-size: 11px;
         }
+    }
+    .stats-points{
+        margin-left: 5px;
+        color: #9C9DAC;
+        font-size: 11px;
+        font-weight: bold;
+    }
+}
+
+
+.statistics-pager-grid{
+    margin-top: 15px;
+    .stats-course{
+        color: #909295;
+        font-size: 11px;
+        padding: 0px !important;
+    }
+    .stats-reading-name{
+        font-size: 14px;
+        font-weight: bold;
+        padding: 0px !important;
+    }
+}
+
+.stats-charts{
+    margin-top: 10px;
+    .charts-title{
+        font-weight: bold;
+        font-size: 13px;
+    }
+    .charts-subtitle{
+        color: #6F7276;
+        font-size: 12px;
+    }
+    .charts-read-pages{
+        margin-top: 10px;
     }
 }

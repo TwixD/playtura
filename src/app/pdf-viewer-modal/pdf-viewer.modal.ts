@@ -103,6 +103,7 @@ export class PdfViewerModal {
       page: this.page,
       totalPages: this.totalPages,
       percentage: Number(((this.page * 100) / this.totalPages).toFixed(0)),
+      pointsEarned: 0,
       answers: {}
     };
     if (_.has(newReadingStatus, 'id')) {
@@ -111,10 +112,13 @@ export class PdfViewerModal {
         newReadingStatus.percentage = Number(((this.page * 100) / this.totalPages).toFixed(0));
         if (_.isObject(question)) {
           if (!_.has(newReadingStatus.answers, this.page)) {
+            let correct: boolean = question['correctAnswer'] == String(res) ? true : false;
+            let questionPoints: number = Number(question['points']) || 0;
+            newReadingStatus.pointsEarned = correct ? (newReadingStatus.pointsEarned + questionPoints) : newReadingStatus.pointsEarned;
             newReadingStatus.answers[this.page] = {
               questionId: question['id'],
               answer: String(res),
-              correct: question['correctAnswer'] == String(res) ? true : false
+              correct: correct
             };
           }
         }

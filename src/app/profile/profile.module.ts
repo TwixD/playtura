@@ -7,12 +7,14 @@ import { ProfilePage } from './profile.page';
 import { AuthenticateService } from '../services/authenticate.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { FirebaseService } from '../services/firebase-user.service';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
+    ChartsModule,
     RouterModule.forChild([{ path: '', component: ProfilePage }])
   ],
   declarations: [ProfilePage],

@@ -1,5 +1,7 @@
 {
   "name": "playtura",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
