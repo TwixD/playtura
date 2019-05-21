@@ -29,7 +29,7 @@ $font-stack: 'Poppins', sans-serif;
 .description{
     font-family: 'Poppins', sans-serif;
     color: #30363D;
-    padding: auto;
+    font-size: 14px;
 }
 
 .footer{
@@ -44,5 +44,6 @@ $font-stack: 'Poppins', sans-serif;
     font-family: 'Poppins', sans-serif;
     text-transform: capitalize;
     font-weight: bold;
+    margin: 10px;
 }
 

@@ -22,7 +22,7 @@
     <ion-row class="description">
       <ion-col>
         <ion-text>
-          <span>Accede a tus lecturas de la universidad, acumula puntos y hazte el mejor.</span>
+          <span>Accede a tus lecturas, <br>acumula puntos y <br>hazte el mejor.</span>
         </ion-text>
       </ion-col>
     </ion-row>
@@ -31,18 +31,18 @@
       <ion-row class="inputs-login">
         <ion-col>
           <ion-item>
-            <ion-label position="fixed">Nombre</ion-label>
-            <ion-input formControlName="name" class="align-right"></ion-input>
+            <ion-label position="floating">Nombre</ion-label>
+            <ion-input formControlName="name" ></ion-input>
           </ion-item>
           <app-form-error-handler [parentForm]="registryForm" fieldName="name" fieldLabel="Nombre"></app-form-error-handler>
           <ion-item>
-            <ion-label position="fixed">Email</ion-label>
-            <ion-input formControlName="email" type="email" inputmode="email" class="align-right"></ion-input>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input formControlName="email" type="email" inputmode="email" ></ion-input>
           </ion-item>
           <app-form-error-handler [parentForm]="registryForm" fieldName="email" fieldLabel="Email"></app-form-error-handler>
           <ion-item>
-            <ion-label position="fixed">Contraseña</ion-label>
-            <ion-input formControlName="password" type="password" class="align-right"></ion-input>
+            <ion-label position="floating">Contraseña</ion-label>
+            <ion-input formControlName="password" type="password" ></ion-input>
           </ion-item>
           <app-form-error-handler [parentForm]="registryForm" fieldName="password" fieldLabel="Contraseña"></app-form-error-handler>
           <ion-item>
@@ -58,7 +58,7 @@
       <!-- Empezar -->
       <ion-row align-items-center class="ahead">
         <ion-col>
-          <ion-button strong size="default" color="secondary" (click)="register()" [disabled]="!registryForm?.valid">Empezar</ion-button>
+          <ion-button class="entrar" strong size="default" color="secondary" (click)="register()" [disabled]="!registryForm?.valid">Empezar</ion-button>
         </ion-col>
       </ion-row>
     </div>

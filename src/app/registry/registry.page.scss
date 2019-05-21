@@ -1,10 +1,12 @@
+$font-stack: 'Poppins', sans-serif;
+
 ion-content{
     --ion-background-color: var(--ion-color-primary);
     --color: white;
     --padding-top: 40px;
-    --padding-start: 40px;
-    --padding-end: 40px;
-    --padding-bottom: 20px;
+    --padding-start: 30px;
+    --padding-end: 30px;
+    --padding-bottom: 15px;
 }
 
 ion-item{
@@ -12,7 +14,17 @@ ion-item{
 }
 
 .registry-form{
-    margin-top: 50px;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 40px;
+}
+
+.login-form{
+    font-family: 'Poppins', sans-serif;
+}
+
+.description{
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
 }
 
 .inputs-login{
@@ -33,20 +45,33 @@ ion-item{
 }
 
 .app-moto{
+    font-family: 'Poppins', sans-serif;
     font-size: 2rem;
+    line-height: 1.2;
     font-weight: bold;
     margin-top: 30px;
 }
 
 .ahead{
     text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .footer{
     text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
     .login{
         font-weight: bold;
         margin-left: 5px;
     }
+}
+
+.entrar{
+    font-family: 'Poppins', sans-serif;
+    text-transform: capitalize;
+    font-weight: bold;
+    margin: 10px;
 }
 
