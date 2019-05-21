@@ -5,7 +5,10 @@ ion-content{
     --padding-bottom: 20px;
 }
 
+$font-stack: 'Poppins', sans-serif;
+
 .login-form{
+    font-family: 'Poppins', sans-serif;
     margin-top: 40px;
 }
 
@@ -14,20 +17,56 @@ ion-content{
     font-family: 'modelica';
 }
 
+
 .app-moto{
+    font-family: 'Poppins', sans-serif;
     font-size: 2rem;
-    font-weight: bold;
-    margin-top: 30px;
+    line-height: 1.2;
+    font-weight: bolder;
+    margin-top: 20px;
+    color: #30363D;
 }
 
 .ahead{
     text-align: center;
+    margin-top: 30px;
+    
+    margin-bottom: 30px;
 }
 
 .footer{
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
     text-align: center;
     .registry{
         font-weight: bold;
         margin-left: 5px;
     }
+}
+
+.forgot{
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    text-align: right;
+    color: #C4C4C4;
+}
+
+.gris{
+    color: #747d88
+}
+
+.login-form{
+    font-family: 'Poppins', sans-serif;
+    color: #30363D;
+}
+
+.description{
+    font-family: 'Poppins', sans-serif;
+    color: #30363D;
+}
+
+.empezar{
+    font-family: 'Poppins', sans-serif;
+    text-transform: capitalize;
+    font-weight: bold;
 }
