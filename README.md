@@ -13,17 +13,25 @@ in an effective way — by gamification techniques — so you can get homework d
 ## Folder Structure
 
 ```
-my-app/
-  README.md
-  node_modules/
+playtura/
+  README.md  
+  angular.json
+  ionic.config.json
+  ionic.starter.json
   package.json
-  firebase.json
+  package-lock.json
+  tsconfig.json
+  tslint.json
+  config.xml
+  e2e/
+  node_modules/
   public/
     index.html
     favicon.ico
     manifest.json
     images/
       icons/
+  resources/
   src/
     App.css
     App.js
@@ -73,12 +81,6 @@ Your app is ready to be deployed!
 
 See the section about [deployment](#deployment) for more information.
 
-
-<h2>Core Team</h2>
-
-[![Arturo Gómez](http://res.cloudinary.com/attearturo/image/upload/v1515451247/arturo3_hngldz.png)](https://github.com/attearturo) | [![Jose David Giraldo](http://res.cloudinary.com/attearturo/image/upload/v1515449112/jose_qbwutd.jpg)](https://github.com/josedavidgm1995) | [![Camilo Montoya](http://res.cloudinary.com/attearturo/image/upload/v1515449583/camilo_gftg7c.jpg)](https://github.com/korneas)
-:---:|:---:|:---:
-[Arturo Gómez](https://github.com/attearturo) | [Jose David Giraldo](https://github.com/josedavidgm1995) | [Camilo Montoya](https://github.com/korneas)
 
 ## License
 
