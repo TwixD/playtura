@@ -1,11 +1,13 @@
 import * as _ from 'lodash';
+import * as moment from "moment";
 import { Component } from '@angular/core';
 import { NavParams, ModalController, AlertController } from '@ionic/angular';
 import { Readings } from '../models/readings';
 import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
 import { ReadingStatus } from '../models/reading-status';
 import { AuthenticateService } from '../services/authenticate.service';
-import { map } from 'rxjs/operators';
+import { map, first } from 'rxjs/operators';
+import { StatisticsFeed } from '../models/statistics-feed';
 
 @Component({
   selector: 'app-pdf-viewer',
@@ -15,6 +17,7 @@ import { map } from 'rxjs/operators';
 export class PdfViewerModal {
 
   ReadingStatusCollection: AngularFirestoreCollection<ReadingStatus>;
+  StatisticsFeedCollection: AngularFirestoreCollection<StatisticsFeed>;
   reading: Readings;
   readingStatus: ReadingStatus;
   totalPages: number;
@@ -24,6 +27,7 @@ export class PdfViewerModal {
   user: any;
   isLoadedReadingStatus: boolean = false;
   setPage: boolean = false;
+  timer: any;
 
   constructor(private modalCtrl: ModalController,
     private db: AngularFirestore,
@@ -33,6 +37,13 @@ export class PdfViewerModal {
     this.user = this.authenticateService.userDetails();
     this.reading = this.navParams.get('reading');
     this.loadQuestions();
+    this.StatisticsFeedCollection = db.collection<StatisticsFeed>('statistics-feed', ref => {
+      let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
+      query = query.where('user', '==', this.user.uid);
+      query = query.where('reading', '==', this.reading['id']);
+      query = query.where('date', '==', new Date(new Date().setHours(0, 0, 0, 0)));
+      return query;
+    });
     this.ReadingStatusCollection = db.collection<ReadingStatus>('reading-status', ref => {
       let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
       query = query.where('user', '==', this.user.uid);
@@ -108,6 +119,7 @@ export class PdfViewerModal {
     };
     if (_.has(newReadingStatus, 'id')) {
       if (this.page > newReadingStatus.page || _.isObject(question)) {
+        let pointsEarned: number = 0;
         newReadingStatus.page = this.page;
         newReadingStatus.percentage = Number(((this.page * 100) / this.totalPages).toFixed(0));
         if (_.isObject(question)) {
@@ -120,13 +132,46 @@ export class PdfViewerModal {
               answer: String(res),
               correct: correct
             };
+            pointsEarned = correct ? questionPoints : 0;
           }
         }
+        this.updateStatisticsFeed(pointsEarned, _.isObject(question) ? 0 : 1);
         await this.ReadingStatusCollection.doc(newReadingStatus['id']).set(newReadingStatus);
       }
     } else {
+      this.updateStatisticsFeed();
       await this.ReadingStatusCollection.add(newReadingStatus);
     }
+  }
+
+  updateStatisticsFeed(pointsEarned: number = 0, pagesRead: number = 1) {
+    this.StatisticsFeedCollection.snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as StatisticsFeed;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      })),
+      first()
+    ).subscribe((rs) => {
+      let newTimer: any = new Date();
+      let statisticsFeed: StatisticsFeed = rs.length > 0 ? rs[0] : {
+        user: this.user.uid,
+        reading: this.reading['id'],
+        date: new Date(new Date().setHours(0, 0, 0, 0)),
+        pagesRead: 1,
+        pointsEarned: 0,
+        readingTime: 0
+      };
+      statisticsFeed.pointsEarned += pointsEarned;
+      statisticsFeed.pagesRead += pagesRead;
+      statisticsFeed.readingTime += Math.abs(this.timer.getTime() - newTimer.getTime());
+      this.timer = newTimer;
+      if (rs.length > 0) {
+        this.StatisticsFeedCollection.doc(statisticsFeed.id).update(statisticsFeed);
+      } else {
+        this.StatisticsFeedCollection.add(statisticsFeed);
+      }
+    });
   }
 
   nextPage(): void {
@@ -144,6 +189,7 @@ export class PdfViewerModal {
   afterLoadComplete(pdfData: any) {
     this.totalPages = pdfData.numPages;
     this.isLoaded = true;
+    this.timer = new Date();
     if (this.setPage) {
       setTimeout(() => {
         this.page = this.readingStatus.page;
