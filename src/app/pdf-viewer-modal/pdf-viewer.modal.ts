@@ -86,7 +86,7 @@ export class PdfViewerModal {
       backdropDismiss: false,
       buttons: [
         {
-          text: 'Ok',
+          text: 'Responder',
           handler: (res) => {
             this.saveReadingStatus(question, res);
           }

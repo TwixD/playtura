@@ -1,18 +1,23 @@
 .modal-content{
+    --font-family: 'Poppins', sans-serif;
     width: 100%;
     height: 100%;
     padding: 30px;
     .title{
+        font-family: 'Poppins', sans-serif;
         color: #FFCB32;
         font-weight: bold;
-        font-size: 16px;
+        font-size: 17px;
     }
     .modal-img{
+        font-family: 'Poppins', sans-serif;
         padding: 20px;
         max-width: 150px;
         max-height: 150px;
     }
     .modal-desc{
+        font-family: 'Poppins', sans-serif;
+        font-size: 12px;
         color: #31373D;
     }
 }
