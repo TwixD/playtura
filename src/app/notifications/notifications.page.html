@@ -1,9 +1,64 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Tab Three
-    </ion-title>
+  <ion-toolbar class="toolbar">
+    <!-- Buscador -->
+    <ion-searchbar placeholder="Buscar curso" [(ngModel)]="searchKey" (ionChange)="searchKeyChange($event)">
+    </ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+
+
+<ion-content class="content">
+
+  <ion-grid>
+  
+    <ion-row>
+      <ion-col size="6">
+        <ion-card>
+          <ion-item>
+            <span>Comunicación oral y escrita I</span>
+            <ion-icon name="more" slot="end"></ion-icon>
+          </ion-item>
+        
+          <ion-card-content>
+            Milton Bentancor<br>
+            15 lecturas<br>
+            4 Créditos
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-card>
+          <ion-item>
+            <span>Algebra y funciones</span>
+            <ion-icon name="more" slot="end"></ion-icon> 
+          </ion-item>
+        
+          <ion-card-content>
+            Carlos Alvarez<br>
+          19 lecturas<br>
+          3 Créditos
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-card>
+          <ion-item>
+            <span>Lógica y argumentación</span>
+            <ion-icon name="more" slot="end"></ion-icon>
+          </ion-item>
+      
+          <ion-card-content>
+            Javier Aguirre<br>
+            24 lecturas<br>
+            3 Créditos
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+    </ion-row>
+</ion-grid>
+
+</ion-content>
