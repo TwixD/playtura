@@ -1,13 +1,16 @@
 import * as _ from 'lodash';
-import { Component, ViewChild } from '@angular/core';
+import * as moment from "moment";
+import { Component, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { AuthenticateService } from '../services/authenticate.service';
 import { FirebaseService } from '../services/firebase-user.service';
 import { universidades } from '../options/options';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
 import { Readings } from '../models/readings';
 import { ReadingStatus } from '../models/reading-status';
+import { StatisticsFeed } from '../models/statistics-feed';
+import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
   selector: 'app-profile',
@@ -16,6 +19,7 @@ import { ReadingStatus } from '../models/reading-status';
 })
 export class ProfilePage {
 
+  @ViewChildren(BaseChartDirective) charts: QueryList<BaseChartDirective>;
   @ViewChild('theSlider') slides;
   user: Object;
   universidades: Object = universidades;
@@ -26,6 +30,8 @@ export class ProfilePage {
   statusByReading: Object = {};
   readingsCollectionRef: AngularFirestoreCollection;
   ReadingStatusCollection: AngularFirestoreCollection<ReadingStatus>;
+  StatisticsFeedCollection: AngularFirestoreCollection<StatisticsFeed>;
+  statisticsFeedSubscription: Subscription;
   readingLevel: number = 0;
   readingLevelProgress: number = 0;
   levels: Array<number> = [200, 400, 600, 800, 1400];
@@ -36,21 +42,22 @@ export class ProfilePage {
   firstLoad: boolean = true;
 
   // CHARTS
+  barChartType: string = 'bar';
+  barChartLegend: boolean = true;
   barChartOptions: any = {
     scaleShowVerticalLines: false,
     responsive: true
   };
-  barChartLabels: string[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-  barChartType: string = 'bar';
-  barChartLegend: boolean = true;
-  barChartData: any[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
-  ];
+  barChartLabels: string[] = [''];
+  barChartData: any[] = [{ data: [0], label: '' }];
+  barChartPointsData: any[] = [{ data: [0], label: '' }];
+  barChartColorPersonal: string = 'rgba(81, 219, 252, 1)';
+  barChartColorGroup: string = 'rgba(89, 124, 251, 1)';
 
   constructor(private db: AngularFirestore,
     private authenticateService: AuthenticateService,
     private firebaseService: FirebaseService) {
+    moment.locale('es');
     this.readingsCollectionRef = db.collection<Readings>('readings', (ref) => {
       let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
       query = query.orderBy('dateDelivery');
@@ -60,8 +67,7 @@ export class ProfilePage {
   }
 
   ionViewDidEnter() {
-    let userUID = this.authenticateService.userDetails().uid;
-    this.firebaseService.getUser(userUID).subscribe((user) => {
+    this.firebaseService.getUser(this.authenticateService.userDetails().uid).subscribe((user) => {
       this.user = user;
     });
   }
@@ -89,7 +95,6 @@ export class ProfilePage {
         this.slides.slideTo(0);
         this.firstLoad = false;
       }
-      console.log(readings);
     });
   }
 
@@ -110,6 +115,86 @@ export class ProfilePage {
       this.statusByReading[this.reading['id']] = rs.length > 0 ? rs[0] : null;
       this.getLevel();
     });
+  }
+
+  loadStatisticsFeed(): void {
+    if (this.statisticsFeedSubscription) {
+      this.statisticsFeedSubscription.unsubscribe();
+    }
+    var startWeek: any = new Date();
+    startWeek.setDate(startWeek.getDate() - 5);
+    startWeek.setHours(0, 0, 0, 0);
+    this.StatisticsFeedCollection = this.db.collection<StatisticsFeed>('statistics-feed', ref => {
+      let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
+      query = query.where('reading', '==', this.reading['id']);
+      query = query.where('date', '>=', new Date(startWeek));
+      return query;
+    });
+    this.statisticsFeedSubscription = this.StatisticsFeedCollection.snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as StatisticsFeed;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    ).subscribe((rs) => {
+      this.loadReadPagesChart(rs);
+    });
+  }
+
+  loadReadPagesChart(statisticsFeed: Array<StatisticsFeed>) {
+    this.barChartLabels.length = 0;
+    this.barChartData.length = 0;
+    this.barChartPointsData.length = 0;
+    let uid: string = this.authenticateService.userDetails().uid;
+    let iReadData: Array<number> = [];
+    let iPointsData: Array<number> = [];
+    let averageGroupReading: Array<number> = [];
+    let averageGroupPoints: Array<number> = [];
+    let fstatisticsFeedByDate = {};
+    let groupStatisticsFeedByDate = {};
+    _.forEach(statisticsFeed, (feed) => {
+      feed.date = new Date(feed.date.seconds * 1000);
+      let dateFormat: string = moment(feed.date).format('MM/DD/YYYY');
+      if (feed.user == uid) {
+        fstatisticsFeedByDate[dateFormat] = feed;
+      } else {
+        groupStatisticsFeedByDate[dateFormat] = _.has(groupStatisticsFeedByDate, dateFormat) ? groupStatisticsFeedByDate[dateFormat] :
+          { readPages: 0, pointsEarned: 0, counter: 0 };
+        groupStatisticsFeedByDate[dateFormat]['readPages'] += feed['pagesRead'];
+        groupStatisticsFeedByDate[dateFormat]['pointsEarned'] += feed['pointsEarned'];
+        groupStatisticsFeedByDate[dateFormat]['counter'] += 1;
+      }
+    });
+    var startWeek: any = new Date();
+    startWeek.setDate(startWeek.getDate() - 6);
+    for (let index = 0; index < 6; index++) {
+      startWeek.setDate(startWeek.getDate() + 1);
+      let dayName: string = moment(startWeek).format('ddd');
+      dayName = _.toUpper(dayName.substring(0, dayName.length - 1));
+      this.barChartLabels.push(dayName);
+      let startWeekFormatted: string = moment(startWeek).format('MM/DD/YYYY');
+      iReadData.push(_.has(fstatisticsFeedByDate, startWeekFormatted) ? fstatisticsFeedByDate[startWeekFormatted]['pagesRead'] : 0);
+      iPointsData.push(_.has(fstatisticsFeedByDate, startWeekFormatted) ? fstatisticsFeedByDate[startWeekFormatted]['pointsEarned'] : 0);
+      let avgReading: number = 0;
+      let avgPoints: number = 0;
+      if (_.has(groupStatisticsFeedByDate, startWeekFormatted)) {
+        let groupStatistics: Object = groupStatisticsFeedByDate[startWeekFormatted];
+        avgReading = groupStatistics['counter'] > 0 && groupStatistics['readPages'] > 0 ?
+          (Number((groupStatistics['readPages'] / groupStatistics['counter']).toFixed(0))) : 0;
+        avgPoints = groupStatistics['counter'] > 0 && groupStatistics['pointsEarned'] > 0 ?
+          (Number((groupStatistics['pointsEarned'] / groupStatistics['counter']).toFixed(0))) : 0;
+      }
+      averageGroupReading.push(avgReading);
+      averageGroupPoints.push(avgPoints);
+    }
+    this.barChartData.push({ data: iReadData, label: 'PERSONAL', backgroundColor: this.barChartColorPersonal });
+    this.barChartData.push({ data: averageGroupReading, label: 'GRUPO', backgroundColor: this.barChartColorGroup });
+    this.barChartPointsData.push({ data: iPointsData, label: 'PERSONAL', backgroundColor: this.barChartColorPersonal });
+    this.barChartPointsData.push({ data: averageGroupPoints, label: 'GRUPO', backgroundColor: this.barChartColorGroup });
+    // Update Manually
+    //   this.charts.forEach((child) => {
+    //     child.chart.update()
+    // });
   }
 
   getStatusPages(): string {
@@ -163,6 +248,7 @@ export class ProfilePage {
     this.slides.getActiveIndex().then((index) => {
       this.reading = this.readingsArray[index];
       this.loadReadingStatus();
+      this.loadStatisticsFeed();
     });
   }
 

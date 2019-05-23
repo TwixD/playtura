@@ -115,6 +115,16 @@
                     </canvas>
                   </div>
                 </ion-row>
+                <ion-row class="charts-subtitle" style="margin-top: 20px">
+                  Puntos obtenidos
+                </ion-row>
+                <ion-row class="charts-read-pages">
+                  <div style="display: block">
+                    <canvas baseChart [datasets]="barChartPointsData" [labels]="barChartLabels" [options]="barChartOptions"
+                      [legend]="barChartLegend" [chartType]="barChartType">
+                    </canvas>
+                  </div>
+                </ion-row>
               </ion-grid>
             </ion-row>
           </ion-grid>
