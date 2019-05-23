@@ -186,6 +186,10 @@ export class PdfViewerModal {
     this.page -= 1;
   }
 
+  getProgress(): number {
+    return Number(((this.page * 100) / this.totalPages).toFixed(0)) / 100;
+  }
+
   afterLoadComplete(pdfData: any) {
     this.totalPages = pdfData.numPages;
     this.isLoaded = true;

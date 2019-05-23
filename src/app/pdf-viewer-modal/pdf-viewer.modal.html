@@ -25,7 +25,6 @@
     </pdf-viewer>
   </div>
 
-  
   <!-- next -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="page!==totalPages">
     <ion-fab-button size="small" color="light" (click)="nextPage()">
@@ -39,7 +38,9 @@
       <ion-icon name="arrow-dropleft"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-  
-
 
 </ion-content>
+
+<ion-footer>
+  <ion-progress-bar [value]="getProgress()" class="reading-progress"></ion-progress-bar>
+</ion-footer>
