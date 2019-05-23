@@ -1,1 +1,84 @@
 
+$font-stack: 'Poppins', sans-serif;
+
+ion-content{
+    --font-family: 'Poppins', sans-serif;
+}
+
+.toolbar{
+  --background: white;
+}
+
+.content{
+  --background: #F5F5F5;
+}
+
+.card-reading{
+    background-color: white;
+    border-radius: 10px;
+    margin: 10px 0px 0px 10px;
+    box-shadow: 0 10px 10px rgba(0,0,0, 0.15);
+      .reading-name{
+        font-family: 'Poppins', sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 1.3;
+        margin-bottom: 10px; 
+        padding: 10px 0px 10px 0px;
+        --inner-border-width: 0px 0px 1px 0px;
+    }
+}
+
+.reading-course, .reading-status{
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  color: #777778;
+  padding-top: 0px;
+}
+
+.reading-points{
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #7B8187;
+}
+
+.urgent-reading-points{
+  color: rgb(255, 138, 98);
+}
+
+.grilla{
+    font-family: 'Poppins', sans-serif;
+    padding-right: 20px;
+}
+
+.reading-progress{
+  ion-progress-bar{
+    --progress-background: #777C85;
+    --background: #CDCED2;
+  }
+}
+
+.urgent-reading-progress{
+  --progress-background: rgb(255, 79, 56) !important;
+  --background: rgb(255, 180, 175) !important;
+}
+
+.reading-status-text, .reading-is-locked{
+  --ion-grid-column-padding: 0px;
+}
+
+.reading-padlock{
+  font-size: 30px;
+  color: rgb(182, 182, 182);
+}
+
+.rmmargin{
+  margin-top: 0px !important;
+}
+
+.searcher{
+  padding: 10px 20px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 10px;
+}

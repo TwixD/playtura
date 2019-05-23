@@ -1,5 +1,11 @@
+$font-stack: 'Poppins', sans-serif;
+
+ion-content{
+    --font-family: 'Poppins', sans-serif;
+}
+
 .toolbar{
-  --background: #F2F2F2;
+  --background: white;
 }
 
 .content{
@@ -11,16 +17,18 @@
   .status-reading{
     color: white;
     font-weight: bold;
-    font-size: 13px;
+    font-size: 14px;
+    margin-bottom: 5px;
   }
 }
 
 .important-reading{
-  --background: #C4C4C4;
+  --background: rgb(255, 173, 49);
   .status-reading{
     color: white;
     font-weight: bold;
-    font-size: 13px;
+    font-size: 14px;
+    margin-bottom: 5px;
   }
 }
 
@@ -28,23 +36,26 @@
   --background: #F5F5F5;
   .status-reading{
     font-weight: bold;
-    font-size: 13px;
+    font-size: 14px;
+    margin-bottom: 5px;
   }
 }
 
 .card-grid{
-  padding: 12px 0px !important;
+  padding: 15px 0px !important;
+  font-family: 'Poppins', sans-serif;
   .card-reading{
     background-color: white;
     width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    border-radius: 10px;
+    box-shadow: 0 10px 10px rgba(0,0,0, 0.15);
     .card-reading-grid{
-      font-size: 13px;
-      padding: 15px;
+      font-size: 14px;
+      padding: 18px;
       .reading-name{
-        font-size: 14px;
+        font-size: 16px;
         font-weight: bold;
+        line-height: 1.3;
       }
     }
   }
@@ -56,14 +67,14 @@
 }
 
 .reading-points{
-  margin-top: 15px;
+  margin-top: 14px;
   margin-bottom: 5px;
   font-weight: bold;
   color: #7B8187;
 }
 
 .urgent-reading-points{
-  color: #DD8365;
+  color: rgb(245, 77, 77);
 }
 
 .reading-progress{
@@ -74,8 +85,8 @@
 }
 
 .urgent-reading-progress{
-  --progress-background: #EE4934 !important;
-  --background: #F4B9B5 !important;
+  --progress-background: rgb(255, 79, 56) !important;
+  --background: rgb(255, 180, 175) !important;
 }
 
 .reading-status-text, .reading-is-locked{
@@ -84,9 +95,17 @@
 
 .reading-padlock{
   font-size: 30px;
-  color: #C3D6FC;
+  color: rgb(182, 182, 182);
 }
 
 .rmmargin{
   margin-top: 0px !important;
 }
+.searcher{
+  padding: 8px 20px;
+  font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    //border: 2px #efefef solid;
+    border-radius: 10px;
+}
+

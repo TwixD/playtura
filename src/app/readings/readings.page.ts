@@ -27,7 +27,7 @@ export class ReadingsPage {
   status: Array<Object> = [
     {
       label: 'Importante',
-      days: 8
+      days: 6
     },
     {
       label: 'Urgente',
