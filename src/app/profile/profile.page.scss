@@ -100,3 +100,67 @@
         margin-top: 10px;
     }
 }
+
+.ranking-top-grid{
+    .positions-table{
+        font-size: 14px;
+        font-weight: bold;
+    }
+    .ranking-header-list{
+        width: 100%;
+        font-size: 12px;
+        color: #C7C7CE;
+    }
+    .user-stats-item{
+        --padding-start: 0px;
+        color: #32383F;
+    }
+    .ranking-pts, .ranking-pages{
+        font-size: 11px; 
+    }
+    .ranking-user{
+        font-size: 11px;
+    }
+    .ranking-position{
+        font-weight: bold;
+    }
+}
+
+
+.first-place{
+    --color: #FFCB32;
+    --background: #FFCB32;
+    font-weight: bold !important;
+    .ranking-user{
+        font-size: 15px !important;
+    }
+    .ranking-pts, .ranking-pages{
+        font-size: 14px; 
+    }
+}
+
+.second-place{
+    --color: #FDE8A1;
+    --background: #FDE8A1;
+    font-weight: bold !important;
+    .ranking-user{
+        font-size: 14px !important;
+    }
+    .ranking-pts, .ranking-pages{
+        font-size: 13px; 
+    }
+}
+
+.third-place{
+    --color: #FCF5DA;
+    --background: #FCF5DA;
+    font-weight: bold !important;
+    .ranking-user{
+        font-size: 13px !important;
+    }
+    .ranking-pts, .ranking-pages{
+        font-size: 12px; 
+    }
+}
+
+

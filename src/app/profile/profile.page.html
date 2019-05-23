@@ -27,10 +27,12 @@
       <ion-icon name="stats"></ion-icon>
       <ion-label>Estadísticas</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="notes">
+    <ion-segment-button layout="icon-start" value="ranking">
+      <ion-icon name="contacts"></ion-icon>
       <ion-label>Grupo</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="skills">
+    <ion-segment-button layout="icon-start" value="missions">
+      <ion-icon name="wifi"></ion-icon>
       <ion-label>Misiones</ion-label>
     </ion-segment-button>
   </ion-segment>
@@ -131,9 +133,83 @@
         </ion-slide>
       </ion-slides>
     </div>
-    <div *ngSwitchCase="'notes'">
+    <div *ngSwitchCase="'ranking'">
+      <ion-slides pager="false" [options]="slideOptsTop" (ionSlideWillChange)="willChangeSlideTop($event)"
+        #theSliderTop>
+        <ion-slide *ngFor="let reading of readingsArray">
+          <ion-grid>
+            <!-- PAGER -->
+            <ion-row>
+              <ion-grid class="statistics-pager-grid">
+                <ion-row>
+                  <ion-col class="ion-text-end ion-align-self-center" (click)="backRanking()">
+                    <ion-icon name="arrow-dropleft"></ion-icon>
+                  </ion-col>
+                  <ion-col class="ion-text-center" size="6">
+                    <ion-row>
+                      <ion-col class="stats-course">
+                        {{ reading.course }}
+                      </ion-col>
+                    </ion-row>
+                    <ion-row>
+                      <ion-col class="stats-reading-name">
+                        {{ reading.name }}
+                      </ion-col>
+                    </ion-row>
+                  </ion-col>
+                  <ion-col class="ion-text-start ion-align-self-center" (click)="nextRanking()">
+                    <ion-icon name="arrow-dropright"></ion-icon>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-row>
+            <!-- TOP -->
+            <ion-row style="margin-top: 10px;">
+              <ion-grid class="ranking-top-grid">
+                <ion-row class="positions-table">
+                  <span>Tabla de posiciones</span>
+                </ion-row>
+                <ion-row class="ranking-header-list">
+                  <ion-col size="8" class="ion-text-left">
+                    POSICIÓN
+                  </ion-col>
+                  <ion-col size="2" class="ion-text-center">
+                    PTS
+                  </ion-col>
+                  <ion-col size="2" class="ion-text-center">
+                    PÁG
+                  </ion-col>
+                </ion-row>
+                <ion-row class="stats-progress ion-align-items-center">
+                  <ion-list style="width:100%">
+                    <ion-item *ngFor="let state of readingsStatesTop; let i = index" class="user-stats-item"
+                      [class.first-place]="i==0" [class.second-place]="i==1" [class.third-place]="i==2">
+                      <ion-row style="width:100%">
+                        <ion-col size="2" class="ranking-position ion-text-center">
+                          <span>
+                            {{ i + 1 }}
+                          </span>
+                        </ion-col>
+                        <ion-col size="6" class="ranking-user">
+                          {{ state.userName }}
+                        </ion-col>
+                        <ion-col size="2" class="ranking-pts ion-text-center">
+                          +{{ state.pointsEarned }}
+                        </ion-col>
+                        <ion-col size="2" class="ranking-pages ion-text-center">
+                          {{ state.page }}
+                        </ion-col>
+                      </ion-row>
+                    </ion-item>
+                  </ion-list>
+                </ion-row>
+              </ion-grid>
+            </ion-row>
+          </ion-grid>
+        </ion-slide>
+      </ion-slides>
     </div>
-    <div *ngSwitchCase="'skills'">
+    <div *ngSwitchCase="'missions'">
     </div>
   </div>
 

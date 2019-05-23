@@ -26,7 +26,7 @@ export class FirebaseService {
     );
   }
 
-  getUsers(prop) {
+  getUsers() {
     return this.users;
   }
 

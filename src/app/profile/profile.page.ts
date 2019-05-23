@@ -10,6 +10,7 @@ import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/fires
 import { Readings } from '../models/readings';
 import { ReadingStatus } from '../models/reading-status';
 import { StatisticsFeed } from '../models/statistics-feed';
+import { User } from '../models/user';
 import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
@@ -21,22 +22,33 @@ export class ProfilePage {
 
   @ViewChildren(BaseChartDirective) charts: QueryList<BaseChartDirective>;
   @ViewChild('theSlider') slides;
+  @ViewChild('theSliderTop') slidesTop;
+  users: Array<User> = [];
+  usersById: Object = {};
   user: Object;
   universidades: Object = universidades;
   segmentSelected: string = 'statistics';
   reading: Readings;
+  readingTop: Readings;
   readings: Observable<any[]>;
   readingsArray: Array<Readings> = [];
+  readingsStatesTop: Array<ReadingStatus> = [];
   statusByReading: Object = {};
   readingsCollectionRef: AngularFirestoreCollection;
   ReadingStatusCollection: AngularFirestoreCollection<ReadingStatus>;
   StatisticsFeedCollection: AngularFirestoreCollection<StatisticsFeed>;
   statisticsFeedSubscription: Subscription;
+  readingStatusSubscription: Subscription;
+  readingStatusTopSubscription: Subscription;
   readingLevel: number = 0;
   readingLevelProgress: number = 0;
   levels: Array<number> = [200, 400, 600, 800, 1400];
   slideOpts: Object = {
-    initialSlide: 1,
+    initialSlide: 0,
+    speed: 400
+  };
+  slideOptsTop: Object = {
+    initialSlide: 0,
     speed: 400
   };
   firstLoad: boolean = true;
@@ -58,6 +70,12 @@ export class ProfilePage {
     private authenticateService: AuthenticateService,
     private firebaseService: FirebaseService) {
     moment.locale('es');
+    firebaseService.getUsers().subscribe((users) => {
+      this.users = users;
+      _.forEach(users, (user) => {
+        this.usersById[user.id] = user;
+      });
+    });
     this.readingsCollectionRef = db.collection<Readings>('readings', (ref) => {
       let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
       query = query.orderBy('dateDelivery');
@@ -66,22 +84,12 @@ export class ProfilePage {
     this.loadReadings();
   }
 
-  ionViewDidEnter() {
-    this.firebaseService.getUser(this.authenticateService.userDetails().uid).subscribe((user) => {
-      this.user = user;
-    });
-  }
-
-  segmentChanged(ev: any) {
-    this.segmentSelected = ev.detail.value;
-  }
-
   getUniversity(): string {
     return this.user ?
       (_.has(universidades, this.user['college']) ? universidades[this.user['college']] : 'Universidad') : 'Universidad';
   }
 
-  loadReadings() {
+  loadReadings(): void {
     this.readings = this.readingsCollectionRef.snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Readings;
@@ -94,18 +102,22 @@ export class ProfilePage {
       if (this.firstLoad) {
         this.slides.slideTo(0);
         this.firstLoad = false;
+        this.willChangeSlide({});
       }
     });
   }
 
   loadReadingStatus(): void {
+    if (this.readingStatusSubscription) {
+      this.readingStatusSubscription.unsubscribe();
+    }
     this.ReadingStatusCollection = this.db.collection<ReadingStatus>('reading-status', ref => {
       let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
       query = query.where('user', '==', this.authenticateService.userDetails().uid);
       query = query.where('reading', '==', this.reading['id']);
       return query;
     });
-    this.ReadingStatusCollection.snapshotChanges().pipe(
+    this.readingStatusSubscription = this.ReadingStatusCollection.snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as ReadingStatus;
         const id = a.payload.doc.id;
@@ -114,6 +126,38 @@ export class ProfilePage {
     ).subscribe((rs) => {
       this.statusByReading[this.reading['id']] = rs.length > 0 ? rs[0] : null;
       this.getLevel();
+    });
+  }
+
+  loadReadingStatusTop(): void {
+    if (this.readingStatusTopSubscription) {
+      this.readingStatusTopSubscription.unsubscribe();
+    }
+    this.ReadingStatusCollection = this.db.collection<ReadingStatus>('reading-status', ref => {
+      let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
+      query = query.where('reading', '==', this.readingTop['id']);
+      return query;
+    });
+    this.readingStatusTopSubscription = this.ReadingStatusCollection.snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as ReadingStatus;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    ).subscribe((rs) => {
+      let readingStates: Array<ReadingStatus> = _.cloneDeep(rs);
+      let sortBy = [{
+        prop: 'pointsEarned',
+        direction: -1
+      }, {
+        prop: 'page',
+        direction: 1
+      }];
+      this.orderBy(readingStates, sortBy);
+      _.forEach(readingStates, (reading) => {
+        reading['userName'] = _.has(this.usersById, reading.user) ? this.usersById[reading.user]['name'] : 'Anónimo';
+      });
+      this.readingsStatesTop = readingStates;
     });
   }
 
@@ -217,6 +261,17 @@ export class ProfilePage {
     return readPts;
   }
 
+  orderBy(arr: Array<Object>, sortBy: Array<Object>): void {
+    arr.sort(function (a, b) {
+      let i = 0, result = 0;
+      while (i < sortBy.length && result === 0) {
+        result = sortBy[i]['direction'] * (a[sortBy[i]['prop']].toString() < b[sortBy[i]['prop']].toString() ? -1 : (a[sortBy[i]['prop']].toString() > b[sortBy[i]['prop']].toString() ? 1 : 0));
+        i++;
+      }
+      return result;
+    })
+  }
+
   getLevel(): void {
     this.readingLevel = 0;
     this.readingLevelProgress = 0;
@@ -244,11 +299,43 @@ export class ProfilePage {
     this.slides.slidePrev();
   }
 
+  nextRanking(): void {
+    this.slidesTop.slideNext();
+  }
+
+  backRanking(): void {
+    this.slidesTop.slidePrev();
+  }
+
+  segmentChanged(ev: any) {
+    this.segmentSelected = ev.detail.value;
+    if (this.segmentSelected == 'ranking') {
+      setTimeout(() => {
+        this.willChangeSlideTop({});
+      }, 100);
+    }
+  }
+
   willChangeSlide(event): void {
     this.slides.getActiveIndex().then((index) => {
       this.reading = this.readingsArray[index];
+      this.slideOpts['initialSlide'] = index;
       this.loadReadingStatus();
       this.loadStatisticsFeed();
+    });
+  }
+
+  willChangeSlideTop(event): void {
+    this.slidesTop.getActiveIndex().then((index) => {
+      this.readingTop = this.readingsArray[index];
+      this.slideOptsTop['initialSlide'] = index;
+      this.loadReadingStatusTop();
+    });
+  }
+
+  ionViewDidEnter() {
+    this.firebaseService.getUser(this.authenticateService.userDetails().uid).subscribe((user) => {
+      this.user = user;
     });
   }
 
