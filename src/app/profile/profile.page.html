@@ -12,7 +12,7 @@
           {{ getUniversity() | uppercase }}
         </ion-row>
         <ion-row class="name-row">
-          {{ ( user?.name || 'Nombre' ) | uppercase }}
+          {{ ( user['name'] || 'Nombre' ) | uppercase }}
         </ion-row>
         <ion-row class="counter-row">
           <span style="margin-right:12px;"><strong>0</strong> apuntes</span>

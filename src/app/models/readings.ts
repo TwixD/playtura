@@ -4,4 +4,5 @@ export interface Readings {
   name: string;
   points: number;
   questions: any;
+  pdf?: string;
 }

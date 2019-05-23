@@ -19,7 +19,7 @@ export class CalendarPage implements OnInit {
   };
 
   minDate = new Date().toISOString();
-
+  collapseCard: boolean = true;
   eventSource = [];
   viewTitle;
 
