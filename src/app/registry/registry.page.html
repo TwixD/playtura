@@ -1,52 +1,49 @@
 <ion-content>
 
-  <ion-grid class="main-grid">
-    <!-- Nombre de la aplicación-->
-    <ion-row class="app-name">
-      <ion-col>
-        <ion-text>
-          <span>playtura</span>
-        </ion-text>
-      </ion-col>
-    </ion-row>
-    <!-- Lema -->
-    <ion-row class="app-moto">
-      <ion-col>
-        <ion-text>
-          <span>Una nueva</span><br>
-          <span>manera de leer</span>
-        </ion-text>
-      </ion-col>
-    </ion-row>
+    <ion-grid class="main-grid">
+        <ion-row class="app-name">
+          <ion-col>
+              <img class="modal-img" src="assets/img/playtura.png">
+          </ion-col>
+        </ion-row>
+        <ion-row class="app-moto">
+          <ion-col>
+            <ion-text>
+                <span>Una nueva</span><br>
+                <span>manera de leer</span>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+
     <!-- Mensaje descripción-->
     <ion-row class="description">
-      <ion-col>
-        <ion-text>
-          <span>Accede a tus lecturas, <br>acumula puntos y <br>hazte el mejor.</span>
-        </ion-text>
-      </ion-col>
-    </ion-row>
+        <ion-col>
+            <span>Empoderate de tu aprendizaje con cualquier lectura</span>
+        </ion-col>
+      </ion-row>
+
+
     <div [formGroup]="registryForm" class="registry-form">
       <!-- Formulario -->
       <ion-row class="inputs-login">
         <ion-col>
           <ion-item>
-            <ion-label position="floating">Nombre</ion-label>
+            <ion-label class="inputs"  position="floating">Nombre</ion-label>
             <ion-input formControlName="name" ></ion-input>
           </ion-item>
           <app-form-error-handler [parentForm]="registryForm" fieldName="name" fieldLabel="Nombre"></app-form-error-handler>
           <ion-item>
-            <ion-label position="floating">Email</ion-label>
+            <ion-label class="inputs" position="floating">Email</ion-label>
             <ion-input formControlName="email" type="email" inputmode="email" ></ion-input>
           </ion-item>
           <app-form-error-handler [parentForm]="registryForm" fieldName="email" fieldLabel="Email"></app-form-error-handler>
           <ion-item>
-            <ion-label position="floating">Contraseña</ion-label>
+            <ion-label class="inputs" position="floating">Contraseña</ion-label>
             <ion-input formControlName="password" type="password" ></ion-input>
           </ion-item>
           <app-form-error-handler [parentForm]="registryForm" fieldName="password" fieldLabel="Contraseña"></app-form-error-handler>
           <ion-item>
-            <ion-label>Universidad</ion-label>
+            <ion-label class="inputs" >Carrera</ion-label>
             <ion-select formControlName="college">
               <ion-select-option *ngFor="let universidad of universidades | keyvalue" [value]="universidad.key">
                 {{ universidad.value | titlecase }}
@@ -55,13 +52,15 @@
           </ion-item>
         </ion-col>
       </ion-row>
+
       <!-- Empezar -->
       <ion-row align-items-center class="ahead">
         <ion-col>
-          <ion-button class="entrar" strong size="default" color="secondary" (click)="register()" [disabled]="!registryForm?.valid">Empezar</ion-button>
+          <ion-button class="empezar" (click)="register()" [disabled]="!registryForm?.valid">Empezar</ion-button>
         </ion-col>
       </ion-row>
     </div>
+
     <!-- Iniciar Sesión -->
     <ion-row class="footer">
       <ion-col>

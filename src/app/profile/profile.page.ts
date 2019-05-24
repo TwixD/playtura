@@ -246,7 +246,7 @@ export class ProfilePage {
     if (_.isObject(this.reading) ?
       (_.has(this.statusByReading, this.reading['id']) ? _.isObject(this.statusByReading[this.reading['id']]) : false) : false) {
       let status = this.statusByReading[this.reading['id']];
-      readProg = `${status['page']}/${status['totalPages']}pág`;
+      readProg = `${status['page']}/${status['totalPages']}`;
     }
     return readProg;
   }

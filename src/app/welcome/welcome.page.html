@@ -3,9 +3,7 @@
   <ion-grid class="main-grid">
     <ion-row class="app-name">
       <ion-col>
-        <ion-text color="primary">
-          <span>Playtura</span>
-        </ion-text>
+          <img class="modal-img" src="assets/img/logo.png">
       </ion-col>
     </ion-row>
     <ion-row class="app-moto">
@@ -15,16 +13,23 @@
         </ion-text>
       </ion-col>
     </ion-row>
+
     <ion-row class="description">
       <ion-col>
-          <span>Motivate a leer jugando y procrastinando</span>
+          <span>Motivate a leer y <br>empoderate de tu <br>aprendizaje</span>
       </ion-col>
     </ion-row>
+
     <ion-row class="ahead">
-      <ion-col>
-        <ion-button class="adelante" size="default" color="secondary" (click)="ahead()">Adelante</ion-button>
-      </ion-col>
-    </ion-row>
+        <ion-col>
+        <ion-button class="adelante" fill="outline" (click)="ahead()">Adelante</ion-button>
+        </ion-col>
+      </ion-row>
+
+        <ion-col>
+        <ion-img class="monstruo" src="assets/img/Monstruo.png"></ion-img>
+        </ion-col>
   </ion-grid>
+
 
 </ion-content>

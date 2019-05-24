@@ -1,5 +1,11 @@
+
+$font-stack: 'Poppins', sans-serif;
+
 .user-info-grid{
+    --font-family: 'Poppins', sans-serif;
+
     .avatar-col{
+        font-family: 'Poppins', sans-serif;
         width: 50px !important;
         max-width: 75px !important;
         min-width: 75px !important;
@@ -10,6 +16,7 @@
         font-size: 13px;
     }
     .name-row{
+        font-family: 'Poppins', sans-serif;
         font-weight: bold;
         font-size: 17px;
         color: #424244;
@@ -36,6 +43,7 @@
 }
 
 .statistics-seg1-grid{
+    font-family: 'Poppins', sans-serif;
     padding: 0px 10px 20px 10px;
     border-bottom: solid 0.1px #C4C4C4;
     .stats-header-row{
@@ -46,6 +54,7 @@
         }
     }
     .stats-value-row{
+        font-family: 'Poppins', sans-serif;
         font-weight: bold;
         font-size: 25px;
         color: #097CF8;
@@ -54,6 +63,7 @@
         }
     }
     .stats-progress{
+        font-family: 'Poppins', sans-serif;
         margin-top: 8px;
         .level{
             width: 65px !important;
@@ -64,6 +74,7 @@
         }
     }
     .stats-points{
+        font-family: 'Poppins', sans-serif;
         margin-left: 5px;
         color: #9C9DAC;
         font-size: 11px;
@@ -74,6 +85,7 @@
 
 .statistics-pager-grid{
     margin-top: 15px;
+    --font-family: 'Poppins', sans-serif;
     .stats-course{
         color: #909295;
         font-size: 11px;
@@ -87,6 +99,7 @@
 }
 
 .stats-charts{
+    font-family: 'Poppins', sans-serif;
     margin-top: 10px;
     .charts-title{
         font-weight: bold;
@@ -102,6 +115,7 @@
 }
 
 .ranking-top-grid{
+    font-family: 'Poppins', sans-serif;
     .positions-table{
         font-size: 14px;
         font-weight: bold;

@@ -92,11 +92,21 @@ export class PdfViewerModal {
       });
     }
     const alert = await this.alertController.create({
-      header: question['question'],
+      subHeader: question['question'],
+      message: `Puntos: 10 - Página ${this.page}/${this.totalPages}`,
       inputs: inputs,
       backdropDismiss: false,
+      cssClass:'alert-danger',
       buttons: [
         {
+          text: 'Atrás',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            this.previousPage();
+          }
+        }, {
+
           text: 'Responder',
           handler: (res) => {
             this.saveReadingStatus(question, res);

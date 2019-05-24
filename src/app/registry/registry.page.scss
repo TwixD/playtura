@@ -15,7 +15,7 @@ ion-item{
 
 .registry-form{
     font-family: 'Poppins', sans-serif;
-    margin-top: 40px;
+    margin-top: 20px;
 }
 
 .login-form{
@@ -25,14 +25,6 @@ ion-item{
 .description{
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
-}
-
-.inputs-login{
-    ion-item{
-        font-size: 0.9rem;
-        height: 35px !important;
-        --min-height: 35px !important;
-    }
 }
 
 .align-right{
@@ -49,29 +41,54 @@ ion-item{
     font-size: 2rem;
     line-height: 1.2;
     font-weight: bold;
-    margin-top: 30px;
+    margin-top: 5px;
 }
+
+
+.inputs-login{
+    margin-top: 10px;
+}
+
+
+.modal-img{
+    height: 25px;
+}
+
+.inputs{
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+}
+
 
 .ahead{
     text-align: center;
-    margin-top: 30px;
-    margin-bottom: 30px;
-}
+    margin-top: 20px;
 
-.footer{
-    text-align: center;
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    .login{
+    .empezar{
+        font-family: 'Poppins', sans-serif;
+        text-transform: capitalize;
         font-weight: bold;
-        margin-left: 5px;
+        --background: #FFCB19;
+        --border-radius: 12px;
+        --padding-start: 35px;
+        --padding-end: 35px;
+        height:40px;
+        --box-shadow: 0 10px 10px rgba(0,0,0, 0.05);
     }
 }
 
-.entrar{
+.footer{
     font-family: 'Poppins', sans-serif;
-    text-transform: capitalize;
-    font-weight: bold;
-    margin: 10px;
+    font-size: 12px;
+    text-align: center;
+    position: fixed;
+    left: 0;
+    bottom: 10px;
+    right: 0;
+    color:white;
+    .login{
+        font-weight: bold;
+        margin-left: 5px;
+        color: #88E15D;
+    }
 }
-
