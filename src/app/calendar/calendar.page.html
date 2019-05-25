@@ -11,25 +11,30 @@
 
       <ion-card-content *ngIf="!collapseCard" class="textForm">
 
-        <ion-item>
-          <ion-input class="textTitle" type="text" placeholder="Título" [(ngModel)]="event.title"></ion-input>
+        <ion-item class="textTitle">
+          <ion-input type="text" placeholder="Título" [(ngModel)]="event.title"></ion-input>
         </ion-item>
-        <ion-item>
-          <ion-input class="textDescription"  type="text" placeholder="Descripción" [(ngModel)]="event.desc"></ion-input>
+
+        <ion-item class="textDescription">
+          <ion-input  type="text" placeholder="Descripción" [(ngModel)]="event.desc"></ion-input>
         </ion-item>
+
         <ion-item class="textDateStart">
           <ion-label>Empieza</ion-label>
           <ion-datetime   displayFormat="MM/DD/YYYY HH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="event.startTime"
             [min]="minDate"></ion-datetime>
         </ion-item>
-        <ion-item>
+
+        <ion-item class="textDateEnd">
           <ion-label>Termina</ion-label>
-          <ion-datetime class="textDateEnd" displayFormat="MM/DD/YYYY HH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="event.endTime"
+          <ion-datetime  displayFormat="MM/DD/YYYY HH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="event.endTime"
             [min]="minDate"></ion-datetime>
         </ion-item>
-        <ion-item>
+
+        <ion-item class="textDay">
           <ion-label>¿Todo el día?</ion-label>
-          <ion-checkbox class="textDay" [(ngModel)]="event.allDay"></ion-checkbox>
+          <ion-checkbox  [(ngModel)]="event.allDay"></ion-checkbox>
+
         </ion-item>
         <ion-button expand="block" (click)="addEvent()" [disabled]="event.title == ''">Agregar evento
         </ion-button>
