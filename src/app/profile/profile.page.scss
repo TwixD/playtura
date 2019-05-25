@@ -11,6 +11,7 @@ $font-stack: 'Poppins', sans-serif;
         min-width: 75px !important;
     }
     .university-row{
+        font-family: 'Poppins', sans-serif;
         color: #1373DB;
         font-weight: bold;
         font-size: 13px;
@@ -22,18 +23,22 @@ $font-stack: 'Poppins', sans-serif;
         color: #424244;
     }
     .counter-row{
-        color: #424244;
+        font-family: 'Poppins', sans-serif;
+        color: #757575;
         font-size: 12px;
     }
 }
 
 .main-segment{
+    font-family: 'Poppins', sans-serif;
+
     ion-segment-button{
-        font-size: 9px !important;
+        font-size: 12px !important;
+        font-weight: bold;
         --margin-top: 10px;
         --padding-bottom: 0px;
         ion-icon{
-            font-size: 13px !important;
+            font-size: 17px !important;
         }
         ion-label{
             margin-top: 0px;
@@ -175,6 +180,13 @@ $font-stack: 'Poppins', sans-serif;
     .ranking-pts, .ranking-pages{
         font-size: 12px; 
     }
+}
+
+.misiones{
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    margin-left: 15px;
+
 }
 
 

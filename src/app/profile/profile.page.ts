@@ -242,7 +242,7 @@ export class ProfilePage {
   }
 
   getStatusPages(): string {
-    let readProg: string = '0/0pág';
+    let readProg: string = '0/0';
     if (_.isObject(this.reading) ?
       (_.has(this.statusByReading, this.reading['id']) ? _.isObject(this.statusByReading[this.reading['id']]) : false) : false) {
       let status = this.statusByReading[this.reading['id']];

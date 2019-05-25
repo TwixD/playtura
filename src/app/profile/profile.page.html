@@ -15,8 +15,8 @@
           {{ ( user['name'] || 'Nombre' ) | uppercase }}
         </ion-row>
         <ion-row class="counter-row">
-          <span style="margin-right:12px;"><strong>0</strong> apuntes</span>
-          <span><strong>0</strong> comentarios</span>
+          <span style="margin-right:12px;"><strong>{{ getStatusPoints() }}</strong> puntos</span>
+          <span><strong>{{ getStatusPages() }}</strong> leído</span>
         </ion-row>
       </ion-col>
     </ion-row>
@@ -212,23 +212,35 @@
     <div *ngSwitchCase="'missions'">
 
       <!-- List of Text Items -->
+
+      <ion-row style="margin-top: 10px;">
+        <ion-grid class="ranking-top-grid">
+          <ion-row class="positions-table">
+            <span>Misiones de lectura</span>
+          </ion-row>
+        </ion-grid>
+      </ion-row>
+
 <ion-list>
     <ion-item>
         <ion-icon name="stats"></ion-icon>
-        <ion-label>Msion 1</ion-label>
-        <span>Descripción</span>
+        <ion-label class="misiones"><Strong>SIEMPRE ARRIBA</Strong><br>0/6 Semanas en el top</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>Mega Man X</ion-label>
+      <ion-icon name="bicycle"></ion-icon>
+      <ion-label class="misiones"><Strong>APRENDIZAJE ACTIVO</Strong><br>0/6 Días de racha leyendo</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>The Legend of Zelda</ion-label>
+      <ion-icon name="hourglass"></ion-icon>
+      <ion-label class="misiones"><Strong>LECTOR TEMPRANO</Strong><br>0/5 Terminadas 3 días antes</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>Pac-Man</ion-label>
+      <ion-icon name="trophy"></ion-icon>
+      <ion-label class="misiones"><Strong>PUNTUACIÓN PERFECTAA</Strong><br>Responder sin errores una prueba</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>Super Mario World</ion-label>
+      <ion-icon name="school"></ion-icon>
+      <ion-label class="misiones"><Strong>ÑOÑEZ</Strong><br>Cumplir todas las misiones</ion-label>
     </ion-item>
   </ion-list>
 
