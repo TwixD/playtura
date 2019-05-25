@@ -8,6 +8,8 @@ import { ReadingStatus } from '../models/reading-status';
 import { AuthenticateService } from '../services/authenticate.service';
 import { map, first } from 'rxjs/operators';
 import { StatisticsFeed } from '../models/statistics-feed';
+import { CustomAlertQuestionModal } from '../custom-alert-question-modal/custom-alert-question-modal';
+import { CustomAlertAnswerModal } from '../custom-alert-answer-modal/custom-alert-answer-modal.component';
 
 @Component({
   selector: 'app-pdf-viewer',
@@ -78,33 +80,22 @@ export class PdfViewerModal {
   }
 
   async presentAlertRadio(question: Object) {
-    let inputs: Array<Object> = [];
-    if (_.isArray(question['answerOptions'])) {
-      _.forEach(question['answerOptions'], (questionOption, key) => {
-        inputs.push({
-          name: `radio${key}`,
-          type: 'radio',
-          label: questionOption,
-          value: key,
-          checked: (key == 0 ? true : false)
-        });
-        this.questions[question['page']] = question;
-      });
-    }
-    const alert = await this.alertController.create({
-      header: question['question'],
-      inputs: inputs,
+    const modal = await this.modalCtrl.create({
+      component: CustomAlertQuestionModal,
       backdropDismiss: false,
-      buttons: [
-        {
-          text: 'Responder',
-          handler: (res) => {
-            this.saveReadingStatus(question, res);
-          }
-        }
-      ]
+      componentProps: {
+        reading: this.reading,
+        question: question
+      },
+      cssClass: 'my-custom-modal-question-css'
     });
-    await alert.present();
+    await modal.present();
+    const { data } = await modal.onDidDismiss();
+    if (typeof (data) === 'undefined') {
+      this.previousPage();
+    } else {
+      this.saveReadingStatus(question, data);
+    }
   }
 
   async saveReadingStatus(question?: Object, res?: number) {
@@ -133,6 +124,16 @@ export class PdfViewerModal {
               correct: correct
             };
             pointsEarned = correct ? questionPoints : 0;
+            const modal = await this.modalCtrl.create({
+              component: CustomAlertAnswerModal,
+              backdropDismiss: false,
+              componentProps: {
+                correct: correct,
+                points: pointsEarned,
+              },
+              cssClass: 'my-custom-modal-css'
+            });
+            modal.present();
           }
         }
         this.updateStatisticsFeed(pointsEarned, _.isObject(question) ? 0 : 1);

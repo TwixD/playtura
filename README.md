@@ -86,3 +86,7 @@ See the section about [deployment](#deployment) for more information.
 
 © 2019
 Cali, Colombia
+
+
+keytool -genkey -v -keystore playtura.keystore -alias playtura -keyalg RSA -keysize 2048 -validity 10000
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore playtura.keystore app-release-unsigned.apk playtura

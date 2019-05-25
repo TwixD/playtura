@@ -14,8 +14,20 @@
 .my-custom-modal-css .modal-wrapper {
     max-width: 400px;
     width: 80%;
-    height: 350px;
+    min-height: 350px;
+    height: auto;
     top: calc(50vh - 175px);
+    position: absolute; 
+    display: block;
+    border-radius: 10px;
+}
+
+.my-custom-modal-question-css .modal-wrapper {
+    max-width: 400px;
+    width: 80%;
+    min-height: 500px;
+    height: auto;
+    top: calc(50vh - 250px);
     position: absolute; 
     display: block;
     border-radius: 10px;

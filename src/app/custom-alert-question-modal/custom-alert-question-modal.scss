@@ -1,0 +1,63 @@
+.modal-content{
+    --font-family: 'Poppins', sans-serif;
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    .title{
+        font-family: 'Poppins', sans-serif;
+        color: #FFCB32;
+        font-weight: bold;
+        font-size: 15px;
+    }
+    .modal-img{
+        font-family: 'Poppins', sans-serif;
+        padding: 5px;
+        max-width: 100px;
+        max-height: 100px;
+    }
+    .modal-desc{
+        font-family: 'Poppins', sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+        color: #31373D;
+    }
+    .button-back, .button-answer{
+        font-size: 13px;
+        font-weight: bold;
+        button{
+            --border-radius: 5px;
+            border-radius: 5px;
+        }
+    }
+    .answer-row{
+        margin: 4px 0px;
+    }
+    .answer-option{
+        padding: 7px;
+        font-size: 12px;
+        color: #6B7075;
+    }
+    .page-of{
+        color: #747D88;
+        font-size: 14px;
+    }
+    .progress-reading{
+        --ion-grid-column-padding: 0px;
+        ion-progress-bar{
+            --progress-background: #F2C94C;
+        }
+    }
+    .buttons{
+        margin-top: 5px;
+    }
+}
+
+.answer-selected{
+    border: 2px solid #F2C94C !important;
+    border-radius: 5px;
+}
+
+.not-answer-selected{
+    border: 1px solid #828589;
+    border-radius: 5px;
+}

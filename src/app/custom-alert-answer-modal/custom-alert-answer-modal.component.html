@@ -1,0 +1,20 @@
+<ion-content>
+  <ion-grid class="modal-content ion-text-center">
+    <ion-row>
+      <ion-col class="remove-padding">
+        <span class="title" [class.incorrect]="!correct">{{ title }}</span>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="remove-padding">
+        <span class="subtitle" [class.incorrect]="!correct">{{ subtitle }}</span>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <img class="modal-img" [src]="img">
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-button class="continue-button" expand="full" [color]="buttonColor" (click)="close()">Continuar</ion-button>
+</ion-content>

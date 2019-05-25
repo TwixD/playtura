@@ -5,6 +5,8 @@ import { PdfViewerModal } from './pdf-viewer.modal';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { AuthenticateService } from '../services/authenticate.service';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { CustomAlertQuestionModalModule } from '../custom-alert-question-modal/custom-alert-question-modal.module';
+import { CustomAlertAnswerModalModule } from '../custom-alert-answer-modal/custom-alert-answer-modal.module';
 
 @NgModule({
   declarations: [
@@ -13,7 +15,9 @@ import { AngularFireAuth } from '@angular/fire/auth';
   imports: [
     IonicModule,
     CommonModule,
-    PdfViewerModule
+    PdfViewerModule,
+    CustomAlertQuestionModalModule,
+    CustomAlertAnswerModalModule
   ],
   entryComponents: [
     PdfViewerModal

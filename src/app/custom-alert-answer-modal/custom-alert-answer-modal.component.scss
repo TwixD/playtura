@@ -1,0 +1,35 @@
+.modal-content{
+    --font-family: 'Poppins', sans-serif;
+    width: 100%;
+    height: calc(100% - 60px);
+    padding: 10px;
+    padding-top: 20px;
+    .title, .subtitle{
+        font-family: 'Poppins', sans-serif;
+        color: #88E162;
+        font-weight: bold;
+    }
+    .title{
+        font-size: 25px;
+    }
+    .subtitle{
+        font-size: 17px;
+    }
+    .modal-img{
+        font-family: 'Poppins', sans-serif;
+        padding: 20px;
+        max-width: 220px;
+        max-height: 220px;
+    }
+    .remove-padding{
+        --ion-grid-column-padding: 0px;
+    }
+    .incorrect{
+        color: #F06B65;
+    }
+}
+
+.continue-button{
+    height: 50px !important;
+    font-weight: bold;
+}

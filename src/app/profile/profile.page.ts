@@ -89,6 +89,10 @@ export class ProfilePage {
       (_.has(universidades, this.user['college']) ? universidades[this.user['college']] : 'Universidad') : 'Universidad';
   }
 
+  getUsername(): string {
+    return this.user ? this.user['name'] : 'Nombre';
+  }
+
   loadReadings(): void {
     this.readings = this.readingsCollectionRef.snapshotChanges().pipe(
       map(actions => actions.map(a => {
