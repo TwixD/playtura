@@ -1,31 +1,26 @@
 <ion-content>
 
-  <ion-grid class="main-grid">
-    <!-- Nombre de la aplicación-->
-    <ion-row class="app-name">
-      <ion-col>
-        <ion-text color="primary">
-          <span>Playtura</span>
-        </ion-text>
-      </ion-col>
-    </ion-row>
-    <!-- Lema -->
-    <ion-row class="app-moto">
-      <ion-col>
-        <ion-text>
-          <span>Una nueva</span><br>
-          <span>manera de leer</span>
-        </ion-text>
-      </ion-col>
-    </ion-row>
+    <ion-grid class="main-grid">
+        <ion-row class="app-name">
+          <ion-col>
+              <img class="modal-img" src="assets/img/logo.png">
+          </ion-col>
+        </ion-row>
+        <ion-row class="app-moto">
+          <ion-col>
+            <ion-text>
+              <span>¡Hola de vuelta!</span>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+
     <!-- Mensaje descripción-->
     <ion-row class="description">
-      <ion-col>
-        <ion-text color="dark">
-          <span>Accede a tus lecturas, <br>acumula puntos y <br>hazte el mejor.</span>
-        </ion-text>
-      </ion-col>
-    </ion-row>
+        <ion-col>
+            <span>Accede a tus lecturas, <br>acumula puntos y <br>hazte el mejor.</span>
+        </ion-col>
+      </ion-row>
+
     <div [formGroup]="loginForm" class="login-form">
       <!-- Formulario -->
       <ion-row class="inputs-login">
@@ -40,6 +35,7 @@
           </ion-item>
         </ion-col>
       </ion-row>
+
       <!-- Olvidé la contraseña -->
       <ion-row justify-content-end class="forgot">
         <ion-col>
@@ -48,19 +44,21 @@
           </ion-text>
         </ion-col>
       </ion-row>
+
       <!-- Empezar-->
       <ion-row align-items-center class="ahead">
         <ion-col>
-          <ion-button class="empezar" size="default" color="secondary" (click)="ahead()" [disabled]="!loginForm.valid">Empezar</ion-button>
+          <ion-button class="empezar" (click)="ahead()" [disabled]="!loginForm.valid">Empezar</ion-button>
         </ion-col>
       </ion-row>
     </div>
+    
     <!-- Registrarse -->
     <ion-row class="footer">
       <ion-col>
         <ion-text>
           <span>¿Aún no tienes cuenta?</span>
-          <ion-text color="tertiary" (click)="registry()" class="registry">
+          <ion-text (click)="registry()" class="registry">
             <span>Registrate</span>
           </ion-text>
         </ion-text>

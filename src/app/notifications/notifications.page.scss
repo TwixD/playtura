@@ -49,7 +49,9 @@ ion-content{
 
 .grilla{
     font-family: 'Poppins', sans-serif;
-    padding-right: 20px;
+    font-size: 14px;
+    padding-left: 10px;
+    color: gray;
 }
 
 .reading-progress{
@@ -81,4 +83,10 @@ ion-content{
   padding: 10px 20px;
   font-family: 'Poppins', sans-serif;
   font-size: 10px;
+}
+
+.grilla{
+      margin-left: 10px;
+    font-size: 14px;
+    color: gray;
 }

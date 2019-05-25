@@ -1,3 +1,5 @@
+$font-stack: 'Poppins', sans-serif;
+
 .barraArriba{
     padding: 10px 0px;
 }
@@ -19,3 +21,20 @@
     --background: #CBCFD4;
     --progress-background: #747D88;
 }
+
+.respuestas{ 
+    font-family: 'Poppins', sans-serif;
+    white-space: pre-wrap;
+}
+
+.md,
+.ios,
+.wp {
+  .alert-danger {
+    background-color: #F35E5D !important;
+    background: #F35E5D  !important;
+    color: red !important;
+    $alert-md-background-color: #F35E5D;
+    $alert-ios-background: #F35E5D;
+    white-space: pre-wrap;
+}}
