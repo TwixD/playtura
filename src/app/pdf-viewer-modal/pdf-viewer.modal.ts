@@ -1,7 +1,6 @@
 import * as _ from 'lodash';
-import * as moment from "moment";
 import { Component } from '@angular/core';
-import { NavParams, ModalController, AlertController } from '@ionic/angular';
+import { NavParams, ModalController } from '@ionic/angular';
 import { Readings } from '../models/readings';
 import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
 import { ReadingStatus } from '../models/reading-status';
@@ -10,6 +9,7 @@ import { map, first } from 'rxjs/operators';
 import { StatisticsFeed } from '../models/statistics-feed';
 import { CustomAlertQuestionModal } from '../custom-alert-question-modal/custom-alert-question-modal';
 import { CustomAlertAnswerModal } from '../custom-alert-answer-modal/custom-alert-answer-modal.component';
+import { CustomAlertFinishModal } from '../custom-alert-finish-modal/custom-alert-finish-modal';
 
 @Component({
   selector: 'app-pdf-viewer',
@@ -34,7 +34,6 @@ export class PdfViewerModal {
   constructor(private modalCtrl: ModalController,
     private db: AngularFirestore,
     private navParams: NavParams,
-    private alertController: AlertController,
     private authenticateService: AuthenticateService) {
     this.user = this.authenticateService.userDetails();
     this.reading = this.navParams.get('reading');
@@ -175,8 +174,27 @@ export class PdfViewerModal {
     });
   }
 
+  async finish() {
+    const modal = await this.modalCtrl.create({
+      component: CustomAlertFinishModal,
+      backdropDismiss: false,
+      componentProps: {
+        reading: this.reading,
+        readingStatus: this.readingStatus
+      },
+      cssClass: 'my-custom-modal-finish-css'
+    });
+    await modal.present();
+    const { data } = await modal.onDidDismiss();
+    this.updateStatisticsFeed(data, 0);
+    this.close();
+  }
+
   nextPage(): void {
     this.page += 1;
+    if (this.page == this.totalPages && this.readingStatus.page !== this.totalPages) {
+      this.finish();
+    }
     this.saveReadingStatus();
     if (_.has(this.questions, this.page) && (_.isObject(this.readingStatus) ? !_.has(this.readingStatus.answers, this.page) : false)) {
       this.presentAlertRadio(this.questions[this.page]);

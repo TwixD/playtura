@@ -32,3 +32,14 @@
     display: block;
     border-radius: 10px;
 }
+
+.my-custom-modal-finish-css .modal-wrapper {
+    max-width: 400px;
+    width: 80%;
+    min-height: 450px;
+    height: auto;
+    top: calc(50vh - 225px);
+    position: absolute; 
+    display: block;
+    border-radius: 10px;
+}

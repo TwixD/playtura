@@ -7,6 +7,7 @@ import { AuthenticateService } from '../services/authenticate.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { CustomAlertQuestionModalModule } from '../custom-alert-question-modal/custom-alert-question-modal.module';
 import { CustomAlertAnswerModalModule } from '../custom-alert-answer-modal/custom-alert-answer-modal.module';
+import { CustomAlertFinishModalModule } from '../custom-alert-finish-modal/custom-alert-finish-modal.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { CustomAlertAnswerModalModule } from '../custom-alert-answer-modal/custo
     CommonModule,
     PdfViewerModule,
     CustomAlertQuestionModalModule,
-    CustomAlertAnswerModalModule
+    CustomAlertAnswerModalModule,
+    CustomAlertFinishModalModule
   ],
   entryComponents: [
     PdfViewerModal
