@@ -31,7 +31,6 @@ $font-stack: 'Poppins', sans-serif;
 
 .main-segment{
     font-family: 'Poppins', sans-serif;
-
     ion-segment-button{
         font-size: 12px !important;
         font-weight: bold;
@@ -186,7 +185,73 @@ $font-stack: 'Poppins', sans-serif;
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
     margin-left: 15px;
-
 }
 
+.stats-results-title{
+    font-family: 'Poppins', sans-serif;
+    color: #067CFB;
+    font-weight: bold;
+    font-size: 16px;
+}
 
+.stats-results-info{
+    font-family: 'Poppins', sans-serif;
+    color: #42474D;
+    font-size: 14px;
+}
+
+.stats-results{
+    .results-qa-grid{
+        margin: 10px 0px;
+    }
+    .results-question-name{
+        font-family: 'Poppins', sans-serif;
+        font-weight: bold;
+        font-size: 13px;
+        color: #4A4F56;
+    }
+    .answer-option{
+        padding: 7px;
+        font-size: 12px;
+        color: #6B7075;
+        border: 1px solid #828589;
+        border-radius: 5px;
+        margin: 2.3px 8px;
+    }
+    .answer-option-points{
+        font-family: 'Poppins', sans-serif;
+        font-weight: bold;
+        color: #88E15D;
+        font-size: 18px;
+    }
+}
+
+.correct-answer{
+    background-color: #88E15D;
+    color: white !important;
+    font-weight: bold;
+    border: 1px solid #88E15D !important;
+}
+
+.incorrect-answer{
+    background-color: #FBE4E2;
+    border: 2px solid #F4A9A5 !important;
+    font-weight: bold;
+}
+
+.results-col{
+    padding: 0px 5px !important;
+}
+
+.results-span{
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    color: #31373D;
+    line-height: 1;
+}
+
+.results-total-span{
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+}

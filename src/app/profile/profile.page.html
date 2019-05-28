@@ -129,6 +129,82 @@
                 </ion-row>
               </ion-grid>
             </ion-row>
+            <!-- SUMMARY -->
+            <ion-row style="margin-top: 15px !important;">
+              <span class="stats-results-title">Resumen</span>
+            </ion-row>
+            <ion-row>
+              <ion-col size="5" class="ion-text-end results-col">
+                <span class="results-span">+{{ summaryFinishingPoints }}</span>
+              </ion-col>
+              <ion-col size="7" class="ion-text-start results-col">
+                <span class="results-span">Terminado</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="5" class="ion-text-end results-col">
+                <span class="results-span">+0</span>
+              </ion-col>
+              <ion-col size="7" class="ion-text-start results-col">
+                <span class="results-span">Puntaje perfecto</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="5" class="ion-text-end results-col">
+                <span class="results-span">+0</span>
+              </ion-col>
+              <ion-col size="7" class="ion-text-start results-col">
+                <span class="results-span">Respuestas correctas</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="5" class="ion-text-end results-col">
+                <span class="results-span">+0</span>
+              </ion-col>
+              <ion-col size="7" class="ion-text-start results-col">
+                <span class="results-span">Misiones</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="5" class="ion-text-end results-col">
+                <span class="results-total-span">+0</span>
+              </ion-col>
+              <ion-col size="7" class="ion-text-start results-col">
+                <span class="results-total-span">Exp</span>
+              </ion-col>
+            </ion-row>
+            <!-- RESULTS -->
+            <ion-row style="margin-top: 15px !important;">
+              <span class="stats-results-title">Resultados</span>
+            </ion-row>
+            <ion-row>
+              <span class="stats-results-info">
+                Respuestas correctas {{ questionsCorrectAnswers }}/{{ questionsWithAnswer.length }}
+              </span>
+            </ion-row>
+            <ion-row>
+              <span class="stats-results-info">Tiempo invertido {{ formatReadingTime() }}</span>
+            </ion-row>
+            <ion-row class="stats-results">
+              <ion-list>
+                <ion-item *ngFor="let qa of questionsWithAnswer; let i = index;">
+                  <ion-grid class="results-qa-grid">
+                    <ion-row class="results-question-name">
+                      {{ qa.question.question }}
+                    </ion-row>
+                    <ion-row let *ngFor="let answerOption of qa.question.answerOptions; let ix = index;">
+                      <span class="answer-option" [class.correct-answer]="ix==qa.question.correctAnswer"
+                        [class.incorrect-answer]="!qa.answer.correct && qa.answer.answer==ix">
+                        {{ answerOption }}
+                      </span>
+                      <span class="answer-option-points ion-align-self-center" *ngIf="ix==qa.question.correctAnswer && qa.answer.correct">
+                        + {{ qa.question.points }}
+                      </span>
+                    </ion-row>
+                  </ion-grid>
+                </ion-item>
+              </ion-list>
+            </ion-row>
           </ion-grid>
         </ion-slide>
       </ion-slides>
@@ -212,7 +288,6 @@
     <div *ngSwitchCase="'missions'">
 
       <!-- List of Text Items -->
-
       <ion-row style="margin-top: 10px;">
         <ion-grid class="ranking-top-grid">
           <ion-row class="positions-table">
@@ -221,28 +296,28 @@
         </ion-grid>
       </ion-row>
 
-<ion-list>
-    <ion-item>
-        <ion-icon name="stats"></ion-icon>
-        <ion-label class="misiones"><Strong>SIEMPRE ARRIBA</Strong><br>0/6 Semanas en el top</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-icon name="bicycle"></ion-icon>
-      <ion-label class="misiones"><Strong>APRENDIZAJE ACTIVO</Strong><br>0/6 Días de racha leyendo</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-icon name="hourglass"></ion-icon>
-      <ion-label class="misiones"><Strong>LECTOR TEMPRANO</Strong><br>0/5 Terminadas 3 días antes</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-icon name="trophy"></ion-icon>
-      <ion-label class="misiones"><Strong>PUNTUACIÓN PERFECTAA</Strong><br>Responder sin errores una prueba</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-icon name="school"></ion-icon>
-      <ion-label class="misiones"><Strong>ÑOÑEZ</Strong><br>Cumplir todas las misiones</ion-label>
-    </ion-item>
-  </ion-list>
+      <ion-list>
+        <ion-item>
+          <ion-icon name="stats"></ion-icon>
+          <ion-label class="misiones"><Strong>SIEMPRE ARRIBA</Strong><br>0/6 Semanas en el top</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="bicycle"></ion-icon>
+          <ion-label class="misiones"><Strong>APRENDIZAJE ACTIVO</Strong><br>0/6 Días de racha leyendo</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="hourglass"></ion-icon>
+          <ion-label class="misiones"><Strong>LECTOR TEMPRANO</Strong><br>0/5 Terminadas 3 días antes</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="trophy"></ion-icon>
+          <ion-label class="misiones"><Strong>PUNTUACIÓN PERFECTAA</Strong><br>Responder sin errores una prueba</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="school"></ion-icon>
+          <ion-label class="misiones"><Strong>ÑOÑEZ</Strong><br>Cumplir todas las misiones</ion-label>
+        </ion-item>
+      </ion-list>
 
     </div>
   </div>

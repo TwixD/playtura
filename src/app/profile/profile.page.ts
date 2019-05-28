@@ -1,5 +1,6 @@
 import * as _ from 'lodash';
 import * as moment from "moment";
+import * as momentDurationFormatSetup from "moment-duration-format";
 import { Component, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { AuthenticateService } from '../services/authenticate.service';
 import { FirebaseService } from '../services/firebase-user.service';
@@ -40,8 +41,11 @@ export class ProfilePage {
   statisticsFeedSubscription: Subscription;
   readingStatusSubscription: Subscription;
   readingStatusTopSubscription: Subscription;
+  readingTime: number = 0;
   readingLevel: number = 0;
   readingLevelProgress: number = 0;
+  questionsWithAnswer: Array<Object> = [];
+  questionsCorrectAnswers: number = 0;
   levels: Array<number> = [200, 400, 600, 800, 1400];
   slideOpts: Object = {
     initialSlide: 0,
@@ -66,10 +70,16 @@ export class ProfilePage {
   barChartColorPersonal: string = 'rgba(81, 219, 252, 1)';
   barChartColorGroup: string = 'rgba(89, 124, 251, 1)';
 
+  // summary
+  finishingPoints: number = 10;
+  summaryFinishingPoints: number = 0;
+
   constructor(private db: AngularFirestore,
     private authenticateService: AuthenticateService,
     private firebaseService: FirebaseService) {
+
     moment.locale('es');
+    momentDurationFormatSetup(moment);
     firebaseService.getUsers().subscribe((users) => {
       this.users = users;
       _.forEach(users, (user) => {
@@ -130,6 +140,8 @@ export class ProfilePage {
     ).subscribe((rs) => {
       this.statusByReading[this.reading['id']] = rs.length > 0 ? rs[0] : null;
       this.getLevel();
+      this.loadResults();
+      this.loadSummary();
     });
   }
 
@@ -185,6 +197,7 @@ export class ProfilePage {
         return { id, ...data };
       }))
     ).subscribe((rs) => {
+      console.log(rs)
       this.loadReadPagesChart(rs);
     });
   }
@@ -193,6 +206,7 @@ export class ProfilePage {
     this.barChartLabels.length = 0;
     this.barChartData.length = 0;
     this.barChartPointsData.length = 0;
+    this.readingTime = 0;
     let uid: string = this.authenticateService.userDetails().uid;
     let iReadData: Array<number> = [];
     let iPointsData: Array<number> = [];
@@ -201,6 +215,7 @@ export class ProfilePage {
     let fstatisticsFeedByDate = {};
     let groupStatisticsFeedByDate = {};
     _.forEach(statisticsFeed, (feed) => {
+      this.readingTime += feed.readingTime;
       feed.date = new Date(feed.date.seconds * 1000);
       let dateFormat: string = moment(feed.date).format('MM/DD/YYYY');
       if (feed.user == uid) {
@@ -243,6 +258,45 @@ export class ProfilePage {
     //   this.charts.forEach((child) => {
     //     child.chart.update()
     // });
+  }
+
+  loadResults() {
+    this.questionsWithAnswer.length = 0;
+    this.questionsCorrectAnswers = 0;
+    if (_.has(this.statusByReading, this.reading['id'])) {
+      let rs: Object = this.statusByReading[this.reading['id']];
+      let questionsObject: Object = {};
+      _.forEach(this.reading.questions, (question) => {
+        questionsObject[question['page']] = question;
+      });
+      if (_.isObject(rs, 'answers') ? (_.keys(rs['answers']).length > 0 ? true : false) : false) {
+        _.forEach(rs['answers'], (answer, key) => {
+          if (answer.correct) {
+            this.questionsCorrectAnswers += 1;
+          }
+          this.questionsWithAnswer.push({
+            answer: answer,
+            question: questionsObject[key]
+          });
+        });
+      }
+    }
+  }
+
+  loadSummary() {
+    if (_.has(this.statusByReading, this.reading['id'])) {
+      let rs: Object = this.statusByReading[this.reading['id']];
+      this.summaryFinishingPoints = rs['page'] == rs['totalPages'] ? this.finishingPoints : 0;
+
+
+    }
+  }
+
+  formatReadingTime(): string {
+    return moment.duration(this.readingTime, "milliseconds").format("d [dias], h [horas], m [min]", {
+      useSignificantDigits: true,
+      precision: 0
+    });
   }
 
   getStatusPages(): string {
