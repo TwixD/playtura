@@ -20,7 +20,9 @@
     position: absolute; 
     display: block;
     border-radius: 10px;
+    box-shadow: 0 10px 10px rgba(0,0,0, 0.15);
 }
+
 
 .my-custom-modal-question-css .modal-wrapper {
     max-width: 400px;
@@ -31,6 +33,13 @@
     position: absolute; 
     display: block;
     border-radius: 10px;
+    box-shadow: 0 10px 10px rgba(0,0,0, 0.15);
+
+    .ion-button{
+        background: rgb(218, 218, 218);
+        border-radius: 10px;
+    }
+    
 }
 
 .my-custom-modal-finish-css .modal-wrapper {
@@ -42,4 +51,30 @@
     position: absolute; 
     display: block;
     border-radius: 10px;
+    box-shadow: 0 10px 10px rgba(0,0,0, 0.15);
 }
+
+
+ion-searchbar{        
+    .searchbar-input-container{            
+        .searchbar-input{
+          padding: 5px 45px;
+          margin: 5px 0px 5px 0px;
+          font-family: 'Poppins', sans-serif;
+          font-size: 13px; 
+          border: 2px rgb(218, 218, 218) solid;
+          border-radius: 10px;
+          box-shadow: 0 0 0 0;
+        }
+
+        ion-icon{
+            padding: 5px 0px;
+            color: dimgrey;
+        }
+    }
+
+    .searchbar-clear-button.sc-ion-searchbar-md{
+        top: -5px;
+    }
+  }
+  

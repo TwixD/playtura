@@ -101,14 +101,30 @@ ion-content{
 .rmmargin{
   margin-top: 0px !important;
 }
-.searcher{
+.buscador{
   padding: 8px 20px;
   font-family: 'Poppins', sans-serif;
     font-size: 12px;
     //border: 2px #efefef solid;
-    border-radius: 10px;
+    
 }
 
+ion-searchbar{        
+  .searchbar-input-container{            
+      .searchbar-input{
+        padding: 8px 20px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 12px !important; 
+        border: 2px rgb(218, 218, 218) solid !important;
+        border-radius: 20px !important;
+      }
+  }
+}
+
+.searchbar-input{
+  border: 2px rgb(218, 218, 218) solid !important;
+        border-radius: 20px !important;
+}
 
 .md,
 .ios,

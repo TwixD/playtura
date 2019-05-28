@@ -11,7 +11,7 @@ export class CustomAlertAnswerModal implements OnInit {
   correct: boolean = true;
   points: number = 0;
   img: string = 'assets/img/Frame.png';
-  title: string = '+0';
+  title: string = '+ 0';
   subtitle: string = '¡Tu respuesta es correcta!';
   buttonColor: string = 'greenman';
 
@@ -19,9 +19,9 @@ export class CustomAlertAnswerModal implements OnInit {
     navParams: NavParams) {
     this.correct = navParams.get('correct');
     this.points = navParams.get('points') || 0;
-    this.title = `+${this.points}`;
+    this.title = `+ ${this.points}`;
     if (!this.correct) {
-      this.title = 'X';
+      this.title = '+ 0';
       this.subtitle = 'Respuesta incorrecta';
       this.buttonColor = 'redman';
       this.img = 'assets/img/playto.png';

@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
-import * as moment from "moment";
-import * as momentDurationFormatSetup from "moment-duration-format";
+import * as moment from 'moment';
+import * as momentDurationFormatSetup from 'moment-duration-format';
 import { Component, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { AuthenticateService } from '../services/authenticate.service';
 import { FirebaseService } from '../services/firebase-user.service';

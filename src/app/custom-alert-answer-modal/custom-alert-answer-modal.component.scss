@@ -4,26 +4,34 @@
     height: calc(100% - 60px);
     padding: 10px;
     padding-top: 20px;
+    border-radius: 10px;
+    box-shadow: 0 10px 10px rgba(0,0,0, 0.15);
+
     .title, .subtitle{
         font-family: 'Poppins', sans-serif;
-        color: #88E162;
+        color: #88E15D;
         font-weight: bold;
     }
     .title{
-        font-size: 25px;
+        font-size: 30px;
+        line-height: 0-9;
+        
     }
     .subtitle{
         font-size: 17px;
     }
+
     .modal-img{
         font-family: 'Poppins', sans-serif;
-        padding: 20px;
+        padding: 10px;
         max-width: 220px;
         max-height: 220px;
     }
+
     .remove-padding{
         --ion-grid-column-padding: 0px;
     }
+
     .incorrect{
         color: #F06B65;
     }
@@ -32,4 +40,7 @@
 .continue-button{
     height: 50px !important;
     font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    text-transform: capitalize;
+
 }

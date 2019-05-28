@@ -1,8 +1,14 @@
 <ion-content>
+    <ion-row>
+        <ion-col class="progress-reading">
+          <ion-progress-bar [value]="porc"></ion-progress-bar>
+        </ion-col>
+      </ion-row>
+
   <ion-grid class="modal-content ion-text-center">
     <ion-row>
       <ion-col>
-        <span class="title">¡Estamos avanzando!</span>
+        <span class="title">{{ pageOf }}<br><Strong>¡Estamos avanzando!</Strong></span>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -19,25 +25,22 @@
     </ion-row>
     <ion-row *ngFor="let answer of question.answerOptions; let i = index" class="answer-row" (click)="clickAnswer(i)"
       [class.answer-selected]="answerSelected == i" [class.not-answer-selected]="answerSelected !== i">
-      <span class="answer-option ion-text-justify">{{ answer }}</span>
+      <span class="answer-option ion-text">{{ answer }}</span>
     </ion-row>
-    <ion-row>
-      <ion-col class="page-of">
-        {{ pageOf }}
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col class="progress-reading">
-        <ion-progress-bar [value]="porc"></ion-progress-bar>
-      </ion-col>
-    </ion-row>
+
     <ion-row class="buttons">
-      <ion-col size="6">
-        <ion-button expand="full" (click)="back()" size="large" class="button-back" color="redman">Atrás</ion-button>
-      </ion-col>
-      <ion-col size="6">
-        <ion-button expand="full" (click)="answer()" size="large" class="button-answer" [disabled]="answerSelected == -1">Responder</ion-button>
-      </ion-col>
+        <ion-col size="6">
+          <ion-button expand="full" (click)="back()" size="large" class="button-back" color="redman">Atrás</ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button expand="full" (click)="answer()" size="large" class="button-answer" [disabled]="answerSelected == -1">Responder</ion-button>
+        </ion-col>
     </ion-row>
+    
+    
   </ion-grid>
+
+  
+  
 </ion-content>
+

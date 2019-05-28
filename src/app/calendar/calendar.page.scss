@@ -6,10 +6,10 @@ ion-content{
 }
 
 .contenido{
-    padding-top: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 20px;
+    padding-top: 18;
+    padding-left: 18;
+    padding-right: 18;
+    padding-bottom: 18;
 }
 
 $font-stack: 'Poppins', sans-serif;
@@ -20,8 +20,9 @@ $font-stack: 'Poppins', sans-serif;
 
 .tarjetaEvento{
         border: 2px rgb(218, 218, 218) solid;
-        margin: 20px;
+        margin: 18px 20px;
         box-shadow: 0px 0px 0px white;
+        border-radius: 10px;
 
             .textNuevo{
                 font-family: 'Poppins', sans-serif;
