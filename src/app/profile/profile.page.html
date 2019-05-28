@@ -9,14 +9,14 @@
       </ion-col>
       <ion-col>
         <ion-row class="university-row">
-          {{ getUniversity() | uppercase }}
+          {{ getUniversity() }}
         </ion-row>
         <ion-row class="name-row">
           {{ getUsername() | uppercase }}
         </ion-row>
         <ion-row class="counter-row">
-          <span style="margin-right:12px;"><strong>{{ getStatusPoints() }}</strong> puntos</span>
-          <span><strong>{{ getStatusPages() }}</strong> leído</span>
+          <span style="margin-right:12px;">Nivel  <strong>{{ ( readingLevel + 1 ) }}</strong></span>
+          <span>Puntos <strong>{{ getStatusPoints() }}</strong></span>
         </ion-row>
       </ion-col>
     </ion-row>
@@ -49,7 +49,7 @@
                   <ion-col class="ion-text-end ion-align-self-center" (click)="back()">
                     <ion-icon name="arrow-dropleft"></ion-icon>
                   </ion-col>
-                  <ion-col class="ion-text-center" size="6">
+                  <ion-col class="ion-text-center" size="8">
                     <ion-row>
                       <ion-col class="stats-course">
                         {{ reading.course }}
@@ -88,7 +88,7 @@
                 </ion-row>
                 <ion-row class="stats-progress ion-align-items-center">
                   <ion-col class="ion-align-items-center">
-                    <ion-progress-bar [value]="readingLevelProgress" style="height: 8px;"></ion-progress-bar>
+                    <ion-progress-bar [value]="readingLevelProgress" color="success" style="height: 15px; border-radius: 15px"></ion-progress-bar>
                   </ion-col>
                   <ion-col class="level">
                     <span>{{ 'NIVEL ' + ( readingLevel + 1 ) }}</span>
@@ -101,6 +101,7 @@
                 </ion-row>
               </ion-grid>
             </ion-row>
+
             <!-- CHARTS -->
             <ion-row class="stats-charts">
               <ion-grid>
@@ -129,6 +130,7 @@
                 </ion-row>
               </ion-grid>
             </ion-row>
+
             <!-- SUMMARY -->
             <ion-row style="margin-top: 15px !important;">
               <span class="stats-results-title">Resumen</span>
@@ -221,7 +223,7 @@
                   <ion-col class="ion-text-end ion-align-self-center" (click)="backRanking()">
                     <ion-icon name="arrow-dropleft"></ion-icon>
                   </ion-col>
-                  <ion-col class="ion-text-center" size="6">
+                  <ion-col class="ion-text-center" size="8">
                     <ion-row>
                       <ion-col class="stats-course">
                         {{ reading.course }}
@@ -298,23 +300,23 @@
 
       <ion-list>
         <ion-item>
-          <ion-icon name="stats"></ion-icon>
+          <ion-icon color="primary" name="stats"></ion-icon>
           <ion-label class="misiones"><Strong>SIEMPRE ARRIBA</Strong><br>0/6 Semanas en el top</ion-label>
         </ion-item>
         <ion-item>
-          <ion-icon name="bicycle"></ion-icon>
+          <ion-icon color="success" name="bicycle"></ion-icon>
           <ion-label class="misiones"><Strong>APRENDIZAJE ACTIVO</Strong><br>0/6 Días de racha leyendo</ion-label>
         </ion-item>
         <ion-item>
-          <ion-icon name="hourglass"></ion-icon>
+          <ion-icon color="tertiary" name="hourglass"></ion-icon>
           <ion-label class="misiones"><Strong>LECTOR TEMPRANO</Strong><br>0/5 Terminadas 3 días antes</ion-label>
         </ion-item>
         <ion-item>
-          <ion-icon name="trophy"></ion-icon>
+          <ion-icon color="secondary" name="trophy"></ion-icon>
           <ion-label class="misiones"><Strong>PUNTUACIÓN PERFECTAA</Strong><br>Responder sin errores una prueba</ion-label>
         </ion-item>
         <ion-item>
-          <ion-icon name="school"></ion-icon>
+          <ion-icon color="danger" name="school"></ion-icon>
           <ion-label class="misiones"><Strong>ÑOÑEZ</Strong><br>Cumplir todas las misiones</ion-label>
         </ion-item>
       </ion-list>

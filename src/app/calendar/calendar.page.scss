@@ -1,26 +1,24 @@
 ion-content{
-    --padding-top: 20px;
+    --padding-top: 5px;
     --padding-start: 20px;
     --padding-end: 20px;
-    --padding-bottom: 20px;
+    --padding-bottom: 10px;
+    --background: #F5F5F5;
+    --font-family: 'Poppins', sans-serif;
 }
 
-.contenido{
-    padding-top: 18;
-    padding-left: 18;
-    padding-right: 18;
-    padding-bottom: 18;
-}
+.toolbar{
+    --background: white;
+  }
 
-$font-stack: 'Poppins', sans-serif;
-
-.contenido{
-    font-family: 'Poppins', sans-serif;
+ion-content{
+    
+    padding: 10px 20px;
 }
 
 .tarjetaEvento{
         border: 2px rgb(218, 218, 218) solid;
-        margin: 18px 20px;
+        margin: 10px 10px;
         box-shadow: 0px 0px 0px white;
         border-radius: 10px;
 
@@ -58,6 +56,10 @@ $font-stack: 'Poppins', sans-serif;
             }
 }
 
+.botones{
+    font-family: 'Poppins', sans-serif;
+}
+
 .hoy{
     align-content: center;
     text-align: center;
@@ -65,4 +67,8 @@ $font-stack: 'Poppins', sans-serif;
 
 .calendario{
     font-family: 'Poppins', sans-serif;
+}
+
+.calendarioContenido{
+    padding: 10px 20px;
 }

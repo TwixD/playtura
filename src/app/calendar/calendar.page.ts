@@ -12,11 +12,12 @@ export class CalendarPage implements OnInit {
 
   event = {
     title: '',
-    desc: '',
-    startTime: '',
-    endTime: '',
-    allDay: false
+      desc: '',
+      startTime: '',
+      endTime: '',
+      allDay: false
   };
+
 
   minDate = new Date().toISOString();
   collapseCard: boolean = true;

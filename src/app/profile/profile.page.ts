@@ -46,7 +46,7 @@ export class ProfilePage {
   readingLevelProgress: number = 0;
   questionsWithAnswer: Array<Object> = [];
   questionsCorrectAnswers: number = 0;
-  levels: Array<number> = [200, 400, 600, 800, 1400];
+  levels: Array<number> = [50, 100, 150, 250, 500];
   slideOpts: Object = {
     initialSlide: 0,
     speed: 400
@@ -250,10 +250,10 @@ export class ProfilePage {
       averageGroupReading.push(avgReading);
       averageGroupPoints.push(avgPoints);
     }
-    this.barChartData.push({ data: iReadData, label: 'PERSONAL', backgroundColor: this.barChartColorPersonal });
-    this.barChartData.push({ data: averageGroupReading, label: 'GRUPO', backgroundColor: this.barChartColorGroup });
-    this.barChartPointsData.push({ data: iPointsData, label: 'PERSONAL', backgroundColor: this.barChartColorPersonal });
-    this.barChartPointsData.push({ data: averageGroupPoints, label: 'GRUPO', backgroundColor: this.barChartColorGroup });
+    this.barChartData.push({ data: iReadData, label: 'Yo', backgroundColor: this.barChartColorPersonal });
+    this.barChartData.push({ data: averageGroupReading, label: 'Grupo', backgroundColor: this.barChartColorGroup });
+    this.barChartPointsData.push({ data: iPointsData, label: 'Yo', backgroundColor: this.barChartColorPersonal });
+    this.barChartPointsData.push({ data: averageGroupPoints, label: 'Grupo', backgroundColor: this.barChartColorGroup });
     // Update Manually
     //   this.charts.forEach((child) => {
     //     child.chart.update()

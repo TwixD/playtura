@@ -13,8 +13,10 @@ $font-stack: 'Poppins', sans-serif;
     .university-row{
         font-family: 'Poppins', sans-serif;
         color: #1373DB;
+        padding-top: 5px;
         font-weight: bold;
         font-size: 13px;
+        line-height: 0.8;
     }
     .name-row{
         font-family: 'Poppins', sans-serif;
@@ -46,42 +48,46 @@ $font-stack: 'Poppins', sans-serif;
     }
 }
 
-.statistics-seg1-grid{
-    font-family: 'Poppins', sans-serif;
-    padding: 0px 10px 20px 10px;
-    border-bottom: solid 0.1px #C4C4C4;
-    .stats-header-row{
-        font-weight: bold;
-        font-size: 13px;
-        ion-col{
-            padding-bottom: 0px !important;
-        }
-    }
-    .stats-value-row{
+    .statistics-seg1-grid{
         font-family: 'Poppins', sans-serif;
-        font-weight: bold;
-        font-size: 25px;
-        color: #097CF8;
-        ion-col{
-            padding-top: 0px !important;
+        padding: 10px 10px 25px 10px;
+        border-bottom: solid 0.1px #C4C4C4;
+    
+        .stats-header-row{
+            font-weight: bold;
+            font-size: 15px;
+            line-height: 0.7;
+            ion-col{
+                padding-bottom: 0px !important;
+            }
+
         }
-    }
-    .stats-progress{
-        font-family: 'Poppins', sans-serif;
-        margin-top: 8px;
-        .level{
-            width: 65px !important;
-            max-width: 65px !important;
-            min-width: 65px !important;
-            color: #CED6FC;
-            font-size: 11px;
+        .stats-value-row{
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
+            font-size: 30px;
+            color: #0ec254;
+            ion-col{
+                padding-top: 0px !important;
+            }
         }
-    }
+        .stats-progress{
+            font-family: 'Poppins', sans-serif;
+            margin-top: 5px;
+            .level{
+                width: 55px !important;
+                max-width: 55px !important;
+                min-width: 55px !important;
+                color: #0ec254;
+                font-size: 13px;
+                font-weight: bold;
+            }
+        }
     .stats-points{
         font-family: 'Poppins', sans-serif;
         margin-left: 5px;
         color: #9C9DAC;
-        font-size: 11px;
+        font-size: 12px;
         font-weight: bold;
     }
 }
@@ -91,11 +97,13 @@ $font-stack: 'Poppins', sans-serif;
     margin-top: 15px;
     --font-family: 'Poppins', sans-serif;
     .stats-course{
+        font-family: 'Poppins', sans-serif;
         color: #909295;
         font-size: 11px;
         padding: 0px !important;
     }
     .stats-reading-name{
+        font-family: 'Poppins', sans-serif;
         font-size: 14px;
         font-weight: bold;
         padding: 0px !important;
@@ -105,15 +113,20 @@ $font-stack: 'Poppins', sans-serif;
 .stats-charts{
     font-family: 'Poppins', sans-serif;
     margin-top: 10px;
+    border-radius: 5px; 
+
     .charts-title{
+        font-family: 'Poppins', sans-serif;
         font-weight: bold;
         font-size: 14px;
     }
     .charts-subtitle{
+        font-family: 'Poppins', sans-serif;
         color: #6F7276;
         font-size: 13px;
     }
     .charts-read-pages{
+        font-family: 'Poppins', sans-serif;
         margin-top: 10px;
     }
 }
@@ -137,6 +150,7 @@ $font-stack: 'Poppins', sans-serif;
         font-size: 11px; 
     }
     .ranking-user{
+        text-transform: capitalize;
         font-size: 11px;
     }
     .ranking-position{
