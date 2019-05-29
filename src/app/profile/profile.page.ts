@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 import * as moment from 'moment';
-import * as momentDurationFormatSetup from 'moment-duration-format';
+import 'moment-duration-format';
 import { Component, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { AuthenticateService } from '../services/authenticate.service';
 import { FirebaseService } from '../services/firebase-user.service';
@@ -77,9 +77,7 @@ export class ProfilePage {
   constructor(private db: AngularFirestore,
     private authenticateService: AuthenticateService,
     private firebaseService: FirebaseService) {
-
     moment.locale('es');
-    momentDurationFormatSetup(moment);
     firebaseService.getUsers().subscribe((users) => {
       this.users = users;
       _.forEach(users, (user) => {
@@ -197,7 +195,6 @@ export class ProfilePage {
         return { id, ...data };
       }))
     ).subscribe((rs) => {
-      console.log(rs)
       this.loadReadPagesChart(rs);
     });
   }
@@ -286,9 +283,7 @@ export class ProfilePage {
   loadSummary() {
     if (_.has(this.statusByReading, this.reading['id'])) {
       let rs: Object = this.statusByReading[this.reading['id']];
-      this.summaryFinishingPoints = rs['page'] == rs['totalPages'] ? this.finishingPoints : 0;
-
-
+      // this.summaryFinishingPoints = rs['page'] == rs['totalPages'] ? this.finishingPoints : 0;
     }
   }
 

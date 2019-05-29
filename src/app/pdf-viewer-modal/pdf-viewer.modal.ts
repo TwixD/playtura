@@ -1,4 +1,6 @@
 import * as _ from 'lodash';
+import * as moment from 'moment';
+import 'moment-duration-format';
 import { Component } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
 import { Readings } from '../models/readings';
@@ -30,6 +32,7 @@ export class PdfViewerModal {
   isLoadedReadingStatus: boolean = false;
   setPage: boolean = false;
   timer: any;
+  timerTop: number = 0;
 
   constructor(private modalCtrl: ModalController,
     private db: AngularFirestore,
@@ -68,6 +71,10 @@ export class PdfViewerModal {
       }
       this.isLoadedReadingStatus = true;
     });
+  }
+
+  getTimer(): string {
+    return moment.duration(this.timerTop, "milliseconds").format("mm:ss");
   }
 
   loadQuestions(): void {
