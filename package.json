@@ -41,7 +41,7 @@
     "ionic": "^4.12.0",
     "ionic2-calendar": "^0.5.2",
     "lodash": "^4.17.11",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "moment-duration-format": "^2.2.2",
     "ng2-charts": "^2.2.3",
     "ng2-pdf-viewer": "^5.2.4",
